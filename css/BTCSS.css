@@ -1,0 +1,24 @@
+button{
+	font-size: 105%;
+}
+
+#scroll{
+	overflow: auto; /* Добавляем полосы прокрутки */
+    width: 325px; /* Ширина блока */
+    height: 300px; /* Высота блока */
+    border: solid double 1px black; /* Параметры рамки */
+}
+#player{
+	 width: 325px; /* Ширина блока */
+     height: 100px; /* Высота блока */
+     border: solid double 1px black; /* Параметры рамки */
+
+}
+
+#menu{
+	margin-left:50px;
+}
+
+#inv{
+	margin-top:50px;
+}
