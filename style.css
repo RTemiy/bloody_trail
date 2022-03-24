@@ -1,0 +1,63 @@
+body {
+    background: black;
+    width: 400px;
+    color: white;
+}
+button : hover {
+    color: white;
+}
+button {
+    border-radius: 5px;
+    margin-left: 20px;
+    border: 2px groove grey;
+    height: 40px;
+    transition: 0.5s linear;
+    color: white;
+    background: black;
+}
+active {
+    color: green;
+    transition: 0.5s linear;
+}
+.active :hover {
+    background: white;
+}
+div {
+    border-radius: 10px;
+    border: 2px groove grey;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    width: 370;
+    overflow: auto;
+}
+invbutton {
+    height: 60px;
+    width: 60px;
+    margin: 0px;
+    border: 0px;
+    font-size: 200%;
+}
+.invwearable {
+    height: 60px;
+    width: 60px;
+    margin: 0px;
+    font-size: 200%;
+    border-color: green;
+}
+.invitem {
+    height: 60px;
+    width: 60px;
+    margin: 0px;
+    font-size: 200%;
+    border-color: white;
+}
+.invblock {
+    width: 184px;
+    height: 180px;
+    box-sizing: border-box;
+}
+.dialogblock {
+    height: 350;
+}
