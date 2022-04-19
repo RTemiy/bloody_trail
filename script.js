@@ -14,8 +14,6 @@ const Entities = [
     }),
 ];
 
-let IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
-
 //STORYLINE
 
 /*
