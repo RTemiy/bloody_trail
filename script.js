@@ -4,12 +4,12 @@ const Entities = [
         type: "Item",
         icon: "🥔",
         name: "🥔 Печёный картофель",
-        title: "Кто-то оставил на костре картошку",
+        title: "Он уже конечно невкусный...",
         money: 1,
         health: 10,
         poison: 5,
         stress: 0,
-        hunger: 25,
+        hunger: 20,
         rlevel: 1
     }),
 ];
@@ -19,7 +19,7 @@ const Entities = [
 
 /*
 = new Dialog({
-    name: "📖 ",
+    name: "",
     text: "",
     buttontext01: "",
     buttontext02: "",
@@ -40,6 +40,7 @@ Q01 = new Dialog({
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
     buttonaction01: "Q02.Set()",
+    buttonaction02: "Q04.Set()",
 });
 
 Q02 = new Dialog({
@@ -73,7 +74,7 @@ MainStreet = new Dialog({
     text: "Перед тобой открывается небольшой средневековый город. Люди торопятся по своим делам. Вдалеке, прямо по дороге виден рынок, слева— лавка ведьмака, а справа площадь при мэрии ",
     buttontext01: "Пойти к рынку",
     buttontext02: "Зайти к ведьмаку",
-    buttontext03: "Направится к зданию мэрии",
+    buttontext03: "Направиться к зданию мэрии",
     buttonaction02: "WitcherStore.Set()",
     buttonaction03: "",
 });
@@ -81,14 +82,61 @@ MainStreet = new Dialog({
 WitcherStore = new Dialog({
     name: "🦹🏻‍♂️ Ведьмак",
     text: "Дверь в лавку неприятно скрипит; ведьмака это не тревожит. В дальнем углу, между ящиками он разбирает склад трав. Также поражает огромный стеллаж с книгами. Где-то колдовство, где-то травничество и забавно, что есть книги по кулинарии",
-    buttontext01: "",
+    buttontext01: "Поговорить с ведьмаком",
     buttontext02: "",
     buttontext03: "",
     buttontext04: "",
     buttontext05: "Уйти",
-    buttonaction01: "",
+    buttonaction01: "Witcher01.Set()",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
     buttonaction05: "MainStreet.Set()",
+});
+
+Witcher01 = new Dialog({
+    text: "Я сейчас очень занят, поэтому попрошу меня не отвлекать, хотя если ты ищешь работу, есть у меня парочка заданий",
+    alternative: function() {
+        WitcherQuest01.Set()},
+    buttontext01: "Поговорить о задании",
+    buttontext02: "",
+    buttontext03: "",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "Witcher02.Set()",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "MainStreet.Set()",
+});
+
+Witcher02 = new Dialog({
+    name: "",
+    text: "Вот что я могу тебе предложить:",
+    buttontext01: "Забрать долг",
+    buttontext02: "",
+    buttontext03: "",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "WitcherQuest01.Set()",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "MainStreet.Set()",
+});
+
+WitcherQuest01 = new Dialog({
+    name: "",
+    text: "Один ремесленник задолжал мне денег, нужно выбить из него всё что можно. После рынка поверни направо и там будет его дом. Он должен мне 5 золотых, выбьешь больше— забирай себе",
+    buttontext01: "Взять задание",
+    buttontext02: "Задание выполнено",
+    buttonactive02: false,
+    buttontext03: "Уйти",
+    buttontext04: "",
+    buttontext05: "",
+    buttonaction01: "MainStreet.Set(); WitcherQuest01.ButtonActive[0]=false",
+    buttonaction02: "Kingdom.Player.Money-=5",
+    buttonaction03: "MainStreet.Set()",
+    buttonaction04: "",
+    buttonaction05: "",
 });

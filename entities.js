@@ -162,6 +162,8 @@ class Dialog {
         var values = values || {};
         this.Name = values.name || "";
         this.Text = values.text || "";
+        this.Active = values.active || true;
+        this.Alternative = values.alternative || "";
         this.ButtonText = [];
         this.ButtonText.push(values.buttontext01 || "");
         this.ButtonText.push(values.buttontext02 || "");
@@ -174,19 +176,47 @@ class Dialog {
         this.ButtonAction.push(values.buttonaction03 || "");
         this.ButtonAction.push(values.buttonaction04 || "");
         this.ButtonAction.push(values.buttonaction05 || "");
+        this.ButtonActive = [];
+        this.ButtonActive.push(values.buttonactive01);
+        this.ButtonActive.push(values.buttonactive02);
+        this.ButtonActive.push(values.buttonactive03);
+        this.ButtonActive.push(values.buttonactive04);
+        this.ButtonActive.push(values.buttonactive05);
     }
     Set() {
-        UMI.Element.DialogTitle.Change("innerHTML", this.Name);
-        UMI.Element.Dialog.Change("innerHTML", this.Text);
-        for (var x = 0; x < 5; x++) {
-            UMI.Elements.SelectionButtons[x].Change("innerHTML", this.ButtonText[x]);
-            UMI.Elements.SelectionButtons[x].SetAttribute("onclick", this.ButtonAction[x]);
-            if (this.ButtonText[x] == "") {
-                UMI.Elements.SelectionButtons[x].HideOrNot(true);
-            } else {
-                UMI.Elements.SelectionButtons[x].HideOrNot(false);
-
-            }
+        this.isActive();
+    }
+    isActive() {
+        if (this.Active == false) {
+            this.Alternative();
+        } else {
+            this.ChangeButtons();
         }
+    }
+    ChangeTitle() {
+        if (this.Name != "") {
+            UMI.Element.DialogTitle.Change("innerHTML", this.Name);
+        }
+        UMI.Element.Dialog.Change("innerHTML", this.Text);
+    }
+    ChangeButtons() {
+        this.ChangeTitle();
+        for (var x = 0; x < 5; x++) {
+            this.ChangeClassic(x);
+            this.ActiveOrNot(x);
+        }
+    }
+    ChangeClassic(a) {
+        UMI.Elements.SelectionButtons[a].Change("innerHTML", this.ButtonText[a]);
+        UMI.Elements.SelectionButtons[a].SetAttribute("onclick", this.ButtonAction[a]);
+    }
+    ActiveOrNot(a) {
+        if (this.ButtonText[a] != "") {
+            UMI.Elements.SelectionButtons[a].HideOrNot(false);
+        }
+        if (this.ButtonText[a] == "" || this.ButtonActive[a] == false) {
+            UMI.Elements.SelectionButtons[a].HideOrNot(true);
+        }
+
     }
 }
