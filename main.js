@@ -25,7 +25,7 @@ Kingdom = new World(
     })
 );
 
-var IntroMusic = new Audio("C:\Users\RTemiy\Downloads\Intro.mp3");
+var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
 
 //PROGRAM BODY
 function InitDialog () {
