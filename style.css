@@ -60,4 +60,5 @@ invbutton {
 }
 .dialogblock {
     height: 350;
+    box-sizing: border-box;
 }
