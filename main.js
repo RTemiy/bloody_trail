@@ -25,6 +25,8 @@ Kingdom = new World(
     })
 );
 
+var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
+
 //PROGRAM BODY
 function InitDialog () {
     UMI.Element.DialogBlock = new Element ("div", "DialogBlock", false);
@@ -169,10 +171,6 @@ function SetReferences() {
 
 }
 
-function InitSounds(){
-    var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
-}
-
 function CreateInterface() {
     InitDialog();
     InitPlayerStats();
@@ -184,7 +182,6 @@ function CreateInterface() {
 
 function Main () {
     CreateInterface();
-    InitSounds();
     Q01.Set();
 
 }
