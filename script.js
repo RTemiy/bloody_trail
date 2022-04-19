@@ -34,13 +34,13 @@ var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
     buttonaction05: "",
 });
 */
-
+IntroMusic.play()
 Q01 = new Dialog({
     name: "📖 Рассказчик",
     text: "Добро пожаловать! О чём ты хочешь знать?",
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
-    buttonaction01: "Q02.Set();IntroMusic.play()",
+    buttonaction01: "Q02.Set()",
     buttonaction02: "Q04.Set()",
 });
 
