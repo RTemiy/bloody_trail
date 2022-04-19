@@ -14,6 +14,7 @@ const Entities = [
     }),
 ];
 
+var IntroMusic = new Audio(https://rtemiy.github.io/bloody_trail/Intro.mp3);
 
 //STORYLINE
 
@@ -39,7 +40,7 @@ Q01 = new Dialog({
     text: "Добро пожаловать! О чём ты хочешь знать?",
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
-    buttonaction01: "Q02.Set()",
+    buttonaction01: "Q02.Set();IntroMusic.Play()",
     buttonaction02: "Q04.Set()",
 });
 
