@@ -40,7 +40,7 @@ Q01 = new Dialog({
     text: "Добро пожаловать! О чём ты хочешь знать?",
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
-    buttonaction01: "Q02.Set();IntroMusic.Play()",
+    buttonaction01: "Q02.Set();IntroMusic.play()",
     buttonaction02: "Q04.Set()",
 });
 
