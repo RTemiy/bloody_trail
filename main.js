@@ -169,6 +169,10 @@ function SetReferences() {
 
 }
 
+function InitSounds(){
+    var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
+}
+
 function CreateInterface() {
     InitDialog();
     InitPlayerStats();
