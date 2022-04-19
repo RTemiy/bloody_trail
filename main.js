@@ -184,6 +184,7 @@ function CreateInterface() {
 
 function Main () {
     CreateInterface();
+    InitSounds();
     Q01.Set();
 
 }
