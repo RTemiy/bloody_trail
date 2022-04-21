@@ -63,11 +63,11 @@ Q04 = new Dialog({
     buttontext03: "+1 к интеллекту",
     buttontext04: "+1 к удаче",
     buttontext05: "+5 золотых монет",
-    buttonaction01: "MainStreet.Set();Kingdom.Player.Strength+=1;)",
-    buttonaction02: "MainStreet.Set();Kingdom.Player.Agility+=1;)",
-    buttonaction03: "MainStreet.Set();Kingdom.Player.Intellegence+=1;)",
-    buttonaction04: "MainStreet.Set();Kingdom.Player.Luck+=1;)",
-    buttonaction05: "MainStreet.Set();Kingdom.Player.Money+=5;)",
+    buttonaction01: "MainStreet.Set();Kingdom.Player.Strength+=1;",
+    buttonaction02: "MainStreet.Set();Kingdom.Player.Agility+=1;",
+    buttonaction03: "MainStreet.Set();Kingdom.Player.Intellegence+=1;",
+    buttonaction04: "MainStreet.Set();Kingdom.Player.Luck+=1;",
+    buttonaction05: "MainStreet.Set();Kingdom.Player.Money+=5;",
 });
 MainStreet = new Dialog({
     name: "📖 Рассказчик",
