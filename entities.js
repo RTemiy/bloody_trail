@@ -182,6 +182,8 @@ class Dialog {
         this.ButtonActive.push(values.buttonactive03);
         this.ButtonActive.push(values.buttonactive04);
         this.ButtonActive.push(values.buttonactive05);
+        this.Ambient = values.ambient || "";
+        this.Music = values.music || "";
     }
     Set() {
         this.isActive();
@@ -205,6 +207,12 @@ class Dialog {
             this.ChangeClassic(x);
             this.ActiveOrNot(x);
         }
+    }
+    ActivateSounds(){
+        if(this.Ambient != ""){
+        SoundEngine.Change("Ambient",this.Ambient);}
+        if(this.Music != ""){
+        SoundEngine.Change("Music",this.Music);}
     }
     ChangeClassic(a) {
         UMI.Elements.SelectionButtons[a].Change("innerHTML", this.ButtonText[a]);
