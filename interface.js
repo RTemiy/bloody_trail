@@ -93,17 +93,17 @@ class Interface {
 //SOUNDENGINE
 class SoundEngine {
     constructor(){
-        this.["Ambient"] = new Audio();
-        this.["Music"] = new Audio();
-        this.["Click"] = new Audio();
-        this.["Item"] = new Audio();
+        this["Ambient"] = new Audio();
+        this["Music"] = new Audio();
+        this["Click"] = new Audio();
+        this["Item"] = new Audio();
     }
     Play(t){
-        this.[t].stop();
-        this.[t].play();
+        this[t].stop();
+        this[t].play();
     }
     Change(t,s){
-        this.[t] = new Audio(s);
+        this[t] = new Audio(s);
         this.Play(t);
     }
 }
