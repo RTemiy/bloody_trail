@@ -24,6 +24,7 @@ Kingdom = new World(
         inventory: new Inventory(9),
     })
 );
+SoundEngine = new SoundEngine();
 
 //PROGRAM BODY
 function InitDialog () {
