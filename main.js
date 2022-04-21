@@ -37,7 +37,7 @@ function InitDialog () {
     new Element("hr");
     UMI.Elements.SelectionButtons = [];
     for (var u = 0; u < 5; u++) {
-        UMI.Elements.SelectionButtons.push(new Element("button", "SelectionButton"+u+";SoundEngine.Play('Click');"));
+        UMI.Elements.SelectionButtons.push(new Element("button", "SelectionButton"+u));
     }
     UMI.Element.DialogBlock.Close();
 }
