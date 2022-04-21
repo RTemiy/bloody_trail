@@ -40,7 +40,6 @@ Q01 = new Dialog({
     buttontext02: "Ничего не хочу знать!",
     buttonaction01: "Q02.Set()",
     buttonaction02: "Q04.Set()",
-    music: "https://rtemiy.github.io/bloody_trail/Intro.mp3",
 });
 
 Q02 = new Dialog({
@@ -48,6 +47,7 @@ Q02 = new Dialog({
     text: "Эта игра представляет из себя, текстовый квест. В данном проекте реализовано: инвентарь, диалоги, сражения и показатели игрока",
     buttontext01: "Понятно",
     buttonaction01: "Q03.Set()",
+    music: "https://rtemiy.github.io/bloody_trail/Intro.mp3",
 });
 Q03 = new Dialog({
     name: "📖 Рассказчик",
