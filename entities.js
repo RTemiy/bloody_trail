@@ -186,6 +186,7 @@ class Dialog {
         this.Music = values.music || "";
     }
     Set() {
+        SoundEngine.Play('Click');
         this.isActive();
     }
     isActive() {
