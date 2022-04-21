@@ -203,6 +203,7 @@ class Dialog {
     }
     ChangeButtons() {
         this.ChangeTitle();
+        this.ActivateSounds();
         for (var x = 0; x < 5; x++) {
             this.ChangeClassic(x);
             this.ActiveOrNot(x);
