@@ -77,6 +77,7 @@ MainStreet = new Dialog({
     buttontext03: "Направиться к зданию мэрии",
     buttonaction02: "WitcherStore.Set()",
     buttonaction03: "",
+    ambient: "https://rtemiy.github.io/bloody_trail/MainStreet.mp3",
 });
 
 WitcherStore = new Dialog({
