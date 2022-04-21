@@ -99,7 +99,7 @@ class SoundEngine {
         this["Item"] = new Audio();
     }
     Play(t){
-        this[t].stop();
+        this[t].pause();
         this[t].play();
     }
     Change(t,s){
