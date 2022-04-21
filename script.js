@@ -40,7 +40,7 @@ Q01 = new Dialog({
     buttontext02: "Ничего не хочу знать!",
     buttonaction01: "Q02.Set()",
     buttonaction02: "Q04.Set()",
-    music: "https://rtemiy.github.io/bloody_trail/IntroMusic.mp3",
+    music: "https://rtemiy.github.io/bloody_trail/Intro.mp3",
 });
 
 Q02 = new Dialog({
