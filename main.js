@@ -25,8 +25,6 @@ Kingdom = new World(
     })
 );
 
-var IntroMusic = new Audio("https://rtemiy.github.io/bloody_trail/Intro.mp3");
-
 //PROGRAM BODY
 function InitDialog () {
     UMI.Element.DialogBlock = new Element ("div", "DialogBlock", false);
