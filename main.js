@@ -25,6 +25,7 @@ Kingdom = new World(
     })
 );
 SoundEngine = new SoundEngine();
+SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Click.mp3")
 
 //PROGRAM BODY
 function InitDialog () {
@@ -36,7 +37,7 @@ function InitDialog () {
     new Element("hr");
     UMI.Elements.SelectionButtons = [];
     for (var u = 0; u < 5; u++) {
-        UMI.Elements.SelectionButtons.push(new Element("button", "SelectionButton"+u));
+        UMI.Elements.SelectionButtons.push(new Element("button", "SelectionButton"+u+";SoundEngine.Play("Click");"));
     }
     UMI.Element.DialogBlock.Close();
 }
