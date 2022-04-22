@@ -25,7 +25,7 @@ Kingdom = new World(
     })
 );
 SoundEngine = new SoundEngine();
-SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Click.mp3")
+SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3")
 
 //PROGRAM BODY
 function InitDialog () {
