@@ -6,6 +6,7 @@ script.js
 */
 //VARIABLES
 UMI = new Interface();
+RPS=new RPS('Random');
 Kingdom = new World(
     new Entity({
         name: "🌡 Показатели персонажа:",
@@ -25,7 +26,8 @@ Kingdom = new World(
     })
 );
 SoundEngine = new SoundEngine();
-SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3")
+SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3");
+
 
 //PROGRAM BODY
 function InitDialog () {
@@ -122,6 +124,14 @@ function InitInventory () {
 }
 //()=>{return()}
 function SetReferences() {
+    UMI.Element.RPSEnemyScore.SetRef(()=> {
+        return(RPS.enemyScore)});
+    UMI.Element.RPSPlayerScore.SetRef(()=> {
+        return(RPS.playerScore)});
+        UMI.Element.RPSEnemyTurn.SetRef(()=> {
+        return(RPS.enemyTurn)});
+    UMI.Element.RPSPlayerTurn.SetRef(()=> {
+        return(RPS.playerTurn)});
     UMI.Element.PlayerLevel.SetRef(()=> {
         return(Kingdom.Player.Level)});
     UMI.Element.PlayerMoney.SetRef(()=> {
@@ -168,7 +178,6 @@ function SetReferences() {
         return(Kingdom.Player.Bag.Items[7].Icon)});
     UMI.Elements.PlayerInventory[8].SetRef(()=> {
         return(Kingdom.Player.Bag.Items[8].Icon)});
-
 }
 
 function InitRPS(){
@@ -187,20 +196,30 @@ function InitRPS(){
     UMI.Element.RPSEnemy = new Element('a', 'RPSEnemy');
     UMI.Element.RPSEnemy.Change("innerHTML", " Противник");
     new Element ("hr");
+    UMI.Element.RPSPlayerTurn = new Element('a', 'RPSPlayerTurn');
+    UMI.Element.RPSPlayerTurn.SetAttribute("class","invitem");
+    UMI.Element.RPSStick = new Element('a', 'RPSStick');
+    UMI.Element.RPSStick.Change("innerHTML", "|");
+    UMI.Element.RPSStick.SetAttribute("class","invitem");    
+    UMI.Element.RPSEnemyTurn = new Element('a', 'RPSEnemyTurn');
+    UMI.Element.RPSEnemyTurn.SetAttribute("class","invitem");
+    new Element ("hr");
     UMI.Element.RockButton = new Element ("button","RockButton");
     UMI.Element.RockButton.Change("innerHTML","✊");
     UMI.Element.RockButton.SetAttribute("class","invitem");
-    UMI.Element.RockButton.SetAttribute("onclick","");
+    UMI.Element.RockButton.SetAttribute("onclick","RPS.PlayerTurn('✊')");
     UMI.Element.ScissorsButton = new Element ("button","ScissorsButton");
     UMI.Element.ScissorsButton.Change("innerHTML","✌️");
     UMI.Element.ScissorsButton.SetAttribute("class","invitem");
-    UMI.Element.ScissorsButton.SetAttribute("onclick","");
+    UMI.Element.ScissorsButton.SetAttribute("onclick","RPS.PlayerTurn('✌️')");
     UMI.Element.PaperButton = new Element ("button","PaperButton");
     UMI.Element.PaperButton.Change("innerHTML","✋");
     UMI.Element.PaperButton.SetAttribute("class","invitem");
-    UMI.Element.PaperButton.SetAttribute("onclick","");
+    UMI.Element.PaperButton.SetAttribute("onclick","RPS.PlayerTurn('✋')");
 
     UMI.Element.RPSBlock.Close();
+
+    //🪨✂️📄 || ✊✌️✋
     //UMI.Element.RPSBlock.HideOrNot(true);
 }
 

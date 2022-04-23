@@ -230,10 +230,10 @@ class Dialog {
     }
 }
 
-//RockPaperScissors
+//RockPaperScissors ✊✌️✋
 class RPS {
     constructor(d){
-        this.Dict = ["Rock","Paper","Scissors"];
+        this.Dict = ["✊","✌️","✋"];
         this.difficulty=d;
         this.enemyScore=0;
         this.enemyTurn="";
@@ -254,7 +254,7 @@ class RPS {
             case "Medium":
 
             break;
-            case "Medium":
+            case "Hard":
 
             break;
         }
@@ -263,22 +263,22 @@ class RPS {
     Comparison(){
         if (this.enemyTurn==this.playerTurn){
         }
-        if(this.enemyTurn=="Rock" && this.playerTurn=="Paper"){
+        if(this.enemyTurn=="✊" && this.playerTurn=="✋"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="Rock" && this.playerTurn=="Scissors"){
+        if(this.enemyTurn=="✊" && this.playerTurn=="✌️"){
             this.enemyScore++;
         }
-        if(this.enemyTurn=="Paper" && this.playerTurn=="Rock"){
+        if(this.enemyTurn=="✋" && this.playerTurn=="✊"){
             this.enemyScore++;
         }
-        if(this.enemyTurn=="Paper" && this.playerTurn=="Scissors"){
+        if(this.enemyTurn=="✋" && this.playerTurn=="✌️"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="Scissors" && this.playerTurn=="Rock"){
+        if(this.enemyTurn=="✌️" && this.playerTurn=="✊"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="Scissors" && this.playerTurn=="Paper"){
+        if(this.enemyTurn=="✌️" && this.playerTurn=="✋"){
             this.enemyScore++;
         }
     }
