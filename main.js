@@ -171,13 +171,49 @@ function SetReferences() {
 
 }
 
+function InitRPS(){
+    UMI.Element.RPSBlock = new Element("div", "RPSBlock", false);
+    UMI.Element.RPSBlock.SetAttribute("class", "playerblock");
+    UMI.Element.RPSBlock.Change("align","middle");
+    UMI.Element.RPSMenu = new Element('p', 'RPSMenu');
+    UMI.Element.RPSMenu.Change("innerHTML", "Камень, ножницы, бумага");
+    new Element ("hr");
+    UMI.Element.RPSPlayer = new Element('a', 'RPSPlayer');
+    UMI.Element.RPSPlayer.Change("innerHTML", "Игрок ");
+    UMI.Element.RPSPlayerScore = new Element('a', 'RPSPlayerScore');
+    UMI.Element.RPSDD = new Element('a', 'RPSDD');
+    UMI.Element.RPSDD.Change("innerHTML", ":");
+    UMI.Element.RPSEnemyScore = new Element('a', 'RPSEnemyScore');
+    UMI.Element.RPSEnemy = new Element('a', 'RPSEnemy');
+    UMI.Element.RPSEnemy.Change("innerHTML", " Противник");
+    new Element ("hr");
+    UMI.Element.RockButton = new Element ("button","RockButton");
+    UMI.Element.RockButton.Change("innerHTML","🪨");
+    UMI.Element.RockButton.SetAttribute("class","invitem");
+    UMI.Element.RockButton.SetAttribute("onclick","");
+    UMI.Element.ScissorsButton = new Element ("button","ScissorsButton");
+    UMI.Element.ScissorsButton.Change("innerHTML","✂️");
+    UMI.Element.ScissorsButton.SetAttribute("class","invitem");
+    UMI.Element.ScissorsButton.SetAttribute("onclick","");
+    UMI.Element.PaperButton = new Element ("button","PaperButton");
+    UMI.Element.PaperButton.Change("innerHTML","📄");
+    UMI.Element.PaperButton.SetAttribute("class","invitem");
+    UMI.Element.PaperButton.SetAttribute("onclick","");
+
+    UMI.Element.RPSBlock.Close();
+    //UMI.Element.RPSBlock.HideOrNot(true);
+}
+
 function CreateInterface() {
+    InitRPS();
     InitDialog();
     InitPlayerStats();
     InitInventory();
     SetReferences();
     setInterval(()=>UMI.Refresh(), 100);
     setInterval(()=>Kingdom.Player.LiveLife(), 2000);
+    UMI.Element.Version = new Element ("a", "Version");
+    UMI.Element.Version.Change("innerHTML", "version: 🦹🏻‍♂️0.01");
 }
 
 function Main () {

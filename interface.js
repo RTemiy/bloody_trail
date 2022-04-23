@@ -103,6 +103,7 @@ class SoundEngine {
         this[t].play();
     }
     Change(t,s){
+        this[t].pause();
         this[t] = new Audio(s);
         this.Play(t);
     }

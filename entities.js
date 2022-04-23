@@ -193,6 +193,8 @@ class Dialog {
         if (this.Active == false) {
             this.Alternative();
         } else {
+            this.ActivateSounds();
+            this.ChangeTitle();
             this.ChangeButtons();
         }
     }
@@ -203,8 +205,6 @@ class Dialog {
         UMI.Element.Dialog.Change("innerHTML", this.Text);
     }
     ChangeButtons() {
-        this.ChangeTitle();
-        this.ActivateSounds();
         for (var x = 0; x < 5; x++) {
             this.ChangeClassic(x);
             this.ActiveOrNot(x);
@@ -227,6 +227,59 @@ class Dialog {
         if (this.ButtonText[a] == "" || this.ButtonActive[a] == false) {
             UMI.Elements.SelectionButtons[a].HideOrNot(true);
         }
+    }
+}
 
+//RockPaperScissors
+class RPS {
+    constructor(d){
+        this.Dict = ["Rock","Paper","Scissors"];
+        this.difficulty=d;
+        this.enemyScore=0;
+        this.enemyTurn="";
+        this.enemyTurnsHistory=[];
+        this.playerScore=0;
+        this.playerTurn="";
+    }
+    PlayerTurn(t){
+        this.playerTurn=t;
+        this.EnemyTurn();
+        this.Comparison();
+    }
+    EnemyTurn(){
+        switch(this.difficulty){
+            case "Random":
+            this.enemyTurn=this.Dict[Math.floor(Math.random() * this.Dict.length)];                       
+            break;
+            case "Medium":
+
+            break;
+            case "Medium":
+
+            break;
+        }
+    this.enemyTurnsHistory.push(this.enemyTurn);
+    }
+    Comparison(){
+        if (this.enemyTurn==this.playerTurn){
+        }
+        if(this.enemyTurn=="Rock" && this.playerTurn=="Paper"){
+            this.playerScore++;
+        }
+        if(this.enemyTurn=="Rock" && this.playerTurn=="Scissors"){
+            this.enemyScore++;
+        }
+        if(this.enemyTurn=="Paper" && this.playerTurn=="Rock"){
+            this.enemyScore++;
+        }
+        if(this.enemyTurn=="Paper" && this.playerTurn=="Scissors"){
+            this.playerScore++;
+        }
+        if(this.enemyTurn=="Scissors" && this.playerTurn=="Rock"){
+            this.playerScore++;
+        }
+        if(this.enemyTurn=="Scissors" && this.playerTurn=="Paper"){
+            this.enemyScore++;
+        }
     }
 }
