@@ -47,7 +47,7 @@ Q02 = new Dialog({
     text: "Эта игра представляет из себя, текстовый квест. В данном проекте реализовано: инвентарь, диалоги, сражения и показатели игрока",
     buttontext01: "Понятно",
     buttonaction01: "Q03.Set()",
-    music: "https://rtemiy.github.io/bloody_trail/Sounds/Intro.mp3",
+    music: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Intro.mp3"),
 });
 Q03 = new Dialog({
     name: "📖 Рассказчик",
@@ -79,7 +79,7 @@ MainStreet = new Dialog({
     buttonaction01: "MarketPlace.Set()",
     buttonaction02: "WitcherStore.Set()",
     buttonaction03: "Tavern.Set()",
-    ambient: "https://rtemiy.github.io/bloody_trail/Sounds/MainStreet.mp3",
+    ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/MainStreet.mp3"),
 });
 
 Tavern = new Dialog({
@@ -88,14 +88,23 @@ Tavern = new Dialog({
     buttontext01: "Заказать перекус",
     buttontext02: "Погладить кота",
     buttontext03: "Пообщаться с владельцем таверны",
-    buttontext04: "",
+    buttontext04: "Попытать удачу в 'камень, ножницы, бумага'",
     buttontext05: "Уйти",
     buttonaction01: "",
     buttonaction02: "",
     buttonaction03: "",
-    buttonaction04: "",
+    buttonaction04: "TavernGame.Set()",
     buttonaction05: "MainStreet.Set()",
-    ambient: "https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3",
+    ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3"),
+});
+
+TavernGame = new Dialog({
+    name: "🧖🏻‍♂️Местный доходяга",
+    text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
+    game : new RockPaperScissors(
+        "Random",
+        ()=>{Tavern.Set(),Kingdom.Player.Money++},
+        ()=>{Tavern.Set(),Kingdom.Player.Money-=1},)
 });
 
 MarketPlace = new Dialog({

@@ -164,6 +164,7 @@ class Dialog {
         this.Text = values.text || "";
         this.Active = values.active || true;
         this.Alternative = values.alternative || "";
+        this.Game = values.game;
         this.ButtonText = [];
         this.ButtonText.push(values.buttontext01 || "");
         this.ButtonText.push(values.buttontext02 || "");
@@ -186,17 +187,23 @@ class Dialog {
         this.Music = values.music || "";
     }
     Set() {
-        SoundEngine.Play('Click');
+        let click = new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3");
+        click.Play();
         this.isActive();
     }
     isActive() {
         if (this.Active == false) {
             this.Alternative();
         } else {
-            this.ActivateSounds();
-            this.ChangeTitle();
-            this.ChangeButtons();
+            this.MainActivity();
         }
+    }
+    MainActivity(){
+        this.SetGame();
+        this.ActivateSounds();
+        this.ChangeTitle();
+        this.ChangeButtons();
+
     }
     ChangeTitle() {
         if (this.Name != "") {
@@ -206,33 +213,36 @@ class Dialog {
     }
     ChangeButtons() {
         for (var x = 0; x < 5; x++) {
-            this.ChangeClassic(x);
-            this.ActiveOrNot(x);
+            UMI.Elements.SelectionButtons[x].Change("innerHTML", this.ButtonText[x]);
+            UMI.Elements.SelectionButtons[x].SetAttribute("onclick", this.ButtonAction[x]);
+            if (this.ButtonText[x] != "") {
+                UMI.Elements.SelectionButtons[x].HideOrNot(false);
+        }
+            if (this.ButtonText[x] == "" || this.ButtonActive[x] == false) {
+                UMI.Elements.SelectionButtons[x].HideOrNot(true);
+            }
+        }
+    }
+    SetGame(){
+        if(this.Game != undefined){
+            RPS = new RockPaperScissors(this.Game.difficulty,this.Game.winaction,this.Game.loseaction);
+            UMI.Element.RPSBlock.HideOrNot(false);
+        }
+        else{
+            UMI.Element.RPSBlock.HideOrNot(true);
         }
     }
     ActivateSounds(){
         if(this.Ambient != ""){
-        SoundEngine.Change("Ambient",this.Ambient);}
+        this.Ambient.Play();}
         if(this.Music != ""){
-        SoundEngine.Change("Music",this.Music);}
-    }
-    ChangeClassic(a) {
-        UMI.Elements.SelectionButtons[a].Change("innerHTML", this.ButtonText[a]);
-        UMI.Elements.SelectionButtons[a].SetAttribute("onclick", this.ButtonAction[a]);
-    }
-    ActiveOrNot(a) {
-        if (this.ButtonText[a] != "") {
-            UMI.Elements.SelectionButtons[a].HideOrNot(false);
-        }
-        if (this.ButtonText[a] == "" || this.ButtonActive[a] == false) {
-            UMI.Elements.SelectionButtons[a].HideOrNot(true);
-        }
+        this.Music.Play();}
     }
 }
 
 //RockPaperScissors ✊✌️✋
-class RPS {
-    constructor(d){
+class RockPaperScissors {
+    constructor(d,w,l){
         this.Dict = ["🪨","✂","📄"];
         this.difficulty=d;
         this.enemyScore=0;
@@ -240,8 +250,13 @@ class RPS {
         this.enemyTurnsHistory=[];
         this.playerScore=0;
         this.playerTurn="";
+        this.winaction=w;
+        this.loseaction=l;
+        this.completed=false;
+        this.won=false;
     }
     PlayerTurn(t){
+        this.WinLoseChecker();
         this.playerTurn=t;
         this.EnemyTurn();
         this.Comparison();
@@ -280,6 +295,19 @@ class RPS {
         }
         if(this.enemyTurn=="✂" && this.playerTurn=="📄"){
             this.enemyScore++;
+        }
+    }
+    WinLoseChecker(){
+        let d=this.playerScore-this.enemyScore;
+        if(d>=3){
+            this.completed=true;
+            this.won=true;
+            this.winaction();
+        }
+        if(d<=-3){
+            this.completed=true;
+            this.won=false;
+            this.loseaction();
         }
     }
 }

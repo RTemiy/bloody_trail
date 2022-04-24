@@ -6,7 +6,7 @@ script.js
 */
 //VARIABLES
 UMI = new Interface();
-RPS=new RPS('Random');
+RPS = new RockPaperScissors('Random');
 Kingdom = new World(
     new Entity({
         name: "🌡 Показатели персонажа:",
@@ -25,9 +25,6 @@ Kingdom = new World(
         inventory: new Inventory(9),
     })
 );
-SoundEngine = new SoundEngine();
-SoundEngine["Click"] = new Audio("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3");
-
 
 //PROGRAM BODY
 function InitDialog () {
@@ -124,14 +121,16 @@ function InitInventory () {
 }
 //()=>{return()}
 function SetReferences() {
+    //RockPaperScissors
     UMI.Element.RPSEnemyScore.SetRef(()=> {
         return(RPS.enemyScore)});
     UMI.Element.RPSPlayerScore.SetRef(()=> {
         return(RPS.playerScore)});
-        UMI.Element.RPSEnemyTurn.SetRef(()=> {
+    UMI.Element.RPSEnemyTurn.SetRef(()=> {
         return(RPS.enemyTurn)});
     UMI.Element.RPSPlayerTurn.SetRef(()=> {
         return(RPS.playerTurn)});
+     //PlayerStatistics
     UMI.Element.PlayerLevel.SetRef(()=> {
         return(Kingdom.Player.Level)});
     UMI.Element.PlayerMoney.SetRef(()=> {
@@ -160,6 +159,7 @@ function SetReferences() {
         return(Kingdom.Player.Armor)});
     UMI.Element.PlayerScore.SetRef(()=> {
         return(Kingdom.Player.Score)});
+    //PlayerBag
     UMI.Elements.PlayerInventory[0].SetRef(()=> {
         return(Kingdom.Player.Bag.Items[0].Icon)},);
     UMI.Elements.PlayerInventory[1].SetRef(()=> {
@@ -217,9 +217,8 @@ function InitRPS(){
     UMI.Element.PaperButton.SetAttribute("class","invitem");
     UMI.Element.PaperButton.SetAttribute("onclick","RPS.PlayerTurn('📄')");
     UMI.Element.RPSBlock.Close();
-
+    UMI.Element.RPSBlock.HideOrNot(true);
     //🪨✂️📄 || ✊✌️✋
-    //UMI.Element.RPSBlock.HideOrNot(true);
 }
 
 function CreateInterface() {
@@ -231,7 +230,7 @@ function CreateInterface() {
     setInterval(()=>UMI.Refresh(), 100);
     setInterval(()=>Kingdom.Player.LiveLife(), 2000);
     UMI.Element.Version = new Element ("a", "Version");
-    UMI.Element.Version.Change("innerHTML", "version: 🦹🏻‍♂️0.01");
+    UMI.Element.Version.Change("innerHTML", "version: ✊✌️✋0.02");
 }
 
 function Main () {

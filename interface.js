@@ -8,6 +8,8 @@ class Element {
         this.NeedRef = false;
         this.ref = "";
         this.aref = "";
+        this.aa = "";
+        this.aaref = "";
         this.preref = "";
         this.HideOnEmpty = true;
         if (open == true) {
@@ -50,25 +52,45 @@ class Element {
             this.Change("hidden", false);
         }
     }
-    SetRef(r, a) {
+    SetRef(r, a, aa,aar) {
         this.ref = r;
         this.NeedRef = true;
         this.aref = a;
+        this.aa = aa;
+        this.aaref = aar;
     }
-    ApplyRef() {
+    SetBasicRef(){
         if (this.NeedRef == true) {
             this.Change("innerHTML", this.ref());
-            if (this.aref != undefined) {
+                this.SetOnClickRef();
+        this.HiddenChecker();
+        }
+    }
+    SetOnClickRef(){
+        if (this.aref != undefined) {
                 this.SetAttribute("onclick", ""+ this.aref());
             }
-            if (this.HideOnEmpty == true) {
+    }
+    SetAdditionalAttribute(){
+        if(this.aa != ""){
+            if(this.aaref != ""){
+                this.Change(this.aa, this.aaref);
+            }                
+        }
+    }
+    HiddenChecker(){
+       if (this.HideOnEmpty == true) {
                 if (this.ref()+"" == "") {
                     this.HideOrNot(true);
                 } else {
                     this.HideOrNot(false);
                 }
-            }
-        }
+            } 
+    }
+
+    ApplyRef() {
+        this.SetBasicRef();      
+        this.SetAdditionalAttribute();     
     }
 }
 
@@ -91,20 +113,17 @@ class Interface {
 }
 
 //SOUNDENGINE
-class SoundEngine {
-    constructor(){
-        this["Ambient"] = new Audio();
-        this["Music"] = new Audio();
-        this["Click"] = new Audio();
-        this["Item"] = new Audio();
+class SoundEntity {
+    constructor(l){
+        this['audio'] = new Audio(l);
     }
-    Play(t){
-        this[t].pause();
-        this[t].play();
+    Play(){
+        this['audio'].pause();
+        this['audio'].play();
     }
-    Change(t,s){
-        this[t].pause();
-        this[t] = new Audio(s);
-        this.Play(t);
+    Change(l){
+        this['audio'].pause();
+        this['audio'] = new Audio(s);
+        this['audio'].Play();
     }
 }
