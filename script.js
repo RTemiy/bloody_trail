@@ -103,8 +103,8 @@ TavernGame = new Dialog({
     text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
     game : new RockPaperScissors(
         "Random",
-        ()=>{Tavern.Set(),Kingdom.Player.Money++},
-        ()=>{Tavern.Set(),Kingdom.Player.Money-=1},)
+        ()=>{Tavern.Set(),Kingdom.Player.Money++,Kingdom.Player.Stress+=15},
+        ()=>{Tavern.Set(),Kingdom.Player.Money-=1,Kingdom.Player.Stress+=25},)
 });
 
 MarketPlace = new Dialog({

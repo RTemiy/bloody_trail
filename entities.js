@@ -243,7 +243,7 @@ class Dialog {
 //RockPaperScissors ✊✌️✋
 class RockPaperScissors {
     constructor(d,w,l){
-        this.Dict = ["🪨","✂","📄"];
+        this.Dict = ["✊","✌️","✋"];
         this.difficulty=d;
         this.enemyScore=0;
         this.enemyTurn="";
@@ -278,22 +278,22 @@ class RockPaperScissors {
     Comparison(){
         if (this.enemyTurn==this.playerTurn){
         }
-        if(this.enemyTurn=="🪨" && this.playerTurn=="📄"){
+        if(this.enemyTurn=="✊" && this.playerTurn=="✋"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="🪨" && this.playerTurn=="✂"){
+        if(this.enemyTurn=="✊" && this.playerTurn=="✌️"){
             this.enemyScore++;
         }
-        if(this.enemyTurn=="📄" && this.playerTurn=="🪨"){
+        if(this.enemyTurn=="✋" && this.playerTurn=="✊"){
             this.enemyScore++;
         }
-        if(this.enemyTurn=="📄" && this.playerTurn=="✂"){
+        if(this.enemyTurn=="✋" && this.playerTurn=="✌️"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="✂" && this.playerTurn=="🪨"){
+        if(this.enemyTurn=="✌️" && this.playerTurn=="✊"){
             this.playerScore++;
         }
-        if(this.enemyTurn=="✂" && this.playerTurn=="📄"){
+        if(this.enemyTurn=="✌️" && this.playerTurn=="✋"){
             this.enemyScore++;
         }
     }

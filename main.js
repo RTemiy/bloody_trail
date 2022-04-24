@@ -205,17 +205,17 @@ function InitRPS(){
     UMI.Element.RPSEnemyTurn.SetAttribute("class","invitem");
     new Element ("hr");
     UMI.Element.RockButton = new Element ("button","RockButton");
-    UMI.Element.RockButton.Change("innerHTML","🪨");
+    UMI.Element.RockButton.Change("innerHTML","✊");
     UMI.Element.RockButton.SetAttribute("class","invitem");
-    UMI.Element.RockButton.SetAttribute("onclick","RPS.PlayerTurn('🪨')");
+    UMI.Element.RockButton.SetAttribute("onclick","RPS.PlayerTurn('✊')");
     UMI.Element.ScissorsButton = new Element ("button","ScissorsButton");
-    UMI.Element.ScissorsButton.Change("innerHTML","✂");
+    UMI.Element.ScissorsButton.Change("innerHTML","✌️");
     UMI.Element.ScissorsButton.SetAttribute("class","invitem");
-    UMI.Element.ScissorsButton.SetAttribute("onclick","RPS.PlayerTurn('✂')");
+    UMI.Element.ScissorsButton.SetAttribute("onclick","RPS.PlayerTurn('✌️')");
     UMI.Element.PaperButton = new Element ("button","PaperButton");
-    UMI.Element.PaperButton.Change("innerHTML","📄");
+    UMI.Element.PaperButton.Change("innerHTML","✋");
     UMI.Element.PaperButton.SetAttribute("class","invitem");
-    UMI.Element.PaperButton.SetAttribute("onclick","RPS.PlayerTurn('📄')");
+    UMI.Element.PaperButton.SetAttribute("onclick","RPS.PlayerTurn('✋')");
     UMI.Element.RPSBlock.Close();
     UMI.Element.RPSBlock.HideOrNot(true);
     //🪨✂️📄 || ✊✌️✋
@@ -230,7 +230,7 @@ function CreateInterface() {
     setInterval(()=>UMI.Refresh(), 100);
     setInterval(()=>Kingdom.Player.LiveLife(), 2000);
     UMI.Element.Version = new Element ("a", "Version");
-    UMI.Element.Version.Change("innerHTML", "version: ✊✌️✋0.02");
+    UMI.Element.Version.Change("innerHTML", "version: 🎲0.02rps");
 }
 
 function Main () {
