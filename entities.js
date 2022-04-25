@@ -130,7 +130,6 @@ class Inventory {
                 for (let key in entity) {
                     this.Items[y][key] = entity[key];
                 }
-                entity.Completed = true;
                 break;
             }
         }
