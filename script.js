@@ -1,7 +1,7 @@
 //ITEMS
 const Entities = [];
 Entities["🥔"] = new Entity({
-    type: "Item",
+    type: "Food",
     icon: "🥔",
     name: "🥔 Печёный картофель",
     title: "Он уже конечно невкусный...",
@@ -13,7 +13,7 @@ Entities["🥔"] = new Entity({
     hunger: 20,
 });
 Entities["🍖"] = new Entity({
-    type: "Item",
+    type: "Food",
     icon: "🍖",
     name: "🍖 Окорок",
     title: "Такой сочный и такой жирный— про голод можно будет забыть на долго",
@@ -25,7 +25,7 @@ Entities["🍖"] = new Entity({
     hunger: 100,
 });
 Entities["🍗"] = new Entity({
-    type: "Item",
+    type: "Food",
     icon: "🍗",
     name: "🍗 Куриные ножки",
     title: "Что-то очень напопинает, пальчики оближешь!",
@@ -37,7 +37,7 @@ Entities["🍗"] = new Entity({
     hunger: 25,
 });
 Entities["🍺"] = new Entity({
-    type: "Item",
+    type: "Food",
     icon: "🍺",
     name: "🍺 Пиво",
     title: "Не стоит перебарщивать с этим напитком...",
@@ -151,10 +151,10 @@ TavernFood = new Dialog({
 TavernGame = new Dialog({
     name: "🧖🏻‍♂️Местный доходяга",
     text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
-    game : new RockPaperScissors(
+    game: new RockPaperScissors(
         "Random",
-        ()=>{Tavern.Set(),Player.Money++,Player.Stress+=15},
-        ()=>{Tavern.Set(),Player.Money-=1,Player.Stress+=25},)
+        () => { Tavern.Set(), Player.Money++, Player.Stress += 15 },
+        () => { Tavern.Set(), Player.Money -= 1, Player.Stress += 25 })
 });
 
 MarketPlace = new Dialog({
@@ -189,8 +189,9 @@ WitcherStore = new Dialog({
 
 Witcher01 = new Dialog({
     text: "Я сейчас очень занят, поэтому попрошу меня не отвлекать, хотя если ты ищешь работу, есть у меня парочка заданий",
-    alternative: function() {
-        WitcherQuest01.Set()},
+    alternative: function () {
+        WitcherQuest01.Set()
+    },
     buttontext01: "Поговорить о задании",
     buttontext02: "",
     buttontext03: "",

@@ -24,8 +24,8 @@ class Entity {
 }
 
 //CHARACTER
-class Character extends Entity{
-    constructor(values){
+class Character extends Entity {
+    constructor(values) {
         super(values);
         this.MinHealth = values.minhealth || 0;
         this.MaxHealth = values.health;
@@ -35,7 +35,8 @@ class Character extends Entity{
     AliveChecker(entity) {
         if (entity.Health <= entity.MinHealth) {
             entity.Completed = true;
-        }}
+        }
+    }
     isAlive() {
         if (this.Health <= this.MinHealth ||
             this.Stress >= this.MaxHealth ||
@@ -59,11 +60,16 @@ class Character extends Entity{
         }
     }
     Use(entity) {
-        var q = confirm(entity.Name+". "+entity.Title);
-        if (q == true) {
+        if (confirm(entity.Name + ". " + entity.Title) == true) {
             if (entity.Type == "Wearable") {
                 this.Unwear(entity);
             } else {
+                switch (entity.Type) {
+                    case "Food":
+                        let use = new SoundEntity("Sounds/Food.mp3");
+                        use.Play();
+                        break;
+                }
                 this.Level += entity.Level
                 this.Health += entity.Health;
                 this.Armor += entity.Armor;
@@ -93,9 +99,11 @@ class Character extends Entity{
         this.Money += entity.Money;
         entity.Completed = true;
     }
-    Buy(entity){
-        if(entity.Cost <= this.Money && this.Bag.HavePlace()==true){
-            this.Money-=entity.Cost;
+    Buy(entity) {
+        if (entity.Cost <= this.Money && this.Bag.HavePlace() == true) {
+            let money= new SoundEntity("Sounds/Money.mp3");
+            money.Play();
+            this.Money -= entity.Cost;
             this.Bag.AddItem(entity);
         }
     }
@@ -160,8 +168,8 @@ class Inventory {
                 amount++;
         }
         if (amount == this.MaxCells) {
-            return(false);
-        } 
+            return (false);
+        }
         else {
             return (true);
         }
@@ -199,7 +207,7 @@ class Dialog {
         this.Music = values.music || "";
     }
     Set() {
-        let click = new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Click.mp3");
+        let click = new SoundEntity("Sounds/Click.mp3");
         click.Play();
         this.isActive();
     }
@@ -210,7 +218,7 @@ class Dialog {
             this.MainActivity();
         }
     }
-    MainActivity(){
+    MainActivity() {
         this.SetGame();
         this.ActivateSounds();
         this.ChangeTitle();
@@ -229,96 +237,102 @@ class Dialog {
             UMI.Elements.SelectionButtons[x].SetAttribute("onclick", this.ButtonAction[x]);
             if (this.ButtonText[x] != "") {
                 UMI.Elements.SelectionButtons[x].HideOrNot(false);
-        }
+            }
             if (this.ButtonText[x] == "" || this.ButtonActive[x] == false) {
                 UMI.Elements.SelectionButtons[x].HideOrNot(true);
             }
         }
     }
-    SetGame(){
-        if(this.Game != undefined){
-            RPS = new RockPaperScissors(this.Game.difficulty,this.Game.winaction,this.Game.loseaction);
+    SetGame() {
+        if (this.Game != undefined) {
+            RPS = new RockPaperScissors(this.Game.difficulty, this.Game.winaction, this.Game.loseaction);
             UMI.Element.RPSBlock.HideOrNot(false);
         }
-        else{
+        else {
             UMI.Element.RPSBlock.HideOrNot(true);
         }
     }
-    ActivateSounds(){
-        if(this.Ambient != ""){
-        this.Ambient.Play();}
-        if(this.Music != ""){
-        this.Music.Play();}
+    ActivateSounds() {
+        if (this.Ambient != "") {
+            this.Ambient.Play();
+        }
+        if (this.Music != "") {
+            this.Music.Play();
+        }
     }
 }
 
 //RockPaperScissors ✊✌️✋
 class RockPaperScissors {
-    constructor(d,w,l){
-        this.Dict = ["✊","✌️","✋"];
-        this.difficulty=d;
-        this.enemyScore=0;
-        this.enemyTurn="";
-        this.enemyTurnsHistory=[];
-        this.playerScore=0;
-        this.playerTurn="";
-        this.winaction=w;
-        this.loseaction=l;
-        this.completed=false;
-        this.won=false;
+    constructor(d, w, l) {
+        this.Dict = ["✊", "✌️", "✋"];
+        this.difficulty = d;
+        this.enemyScore = 0;
+        this.enemyTurn = "";
+        this.enemyTurnsHistory = [];
+        this.playerScore = 0;
+        this.playerTurn = "";
+        this.winaction = w;
+        this.loseaction = l;
+        this.completed = false;
+        this.won = false;
     }
-    PlayerTurn(t){
+    PlayerTurn(t) {
         this.WinLoseChecker();
-        this.playerTurn=t;
+        this.playerTurn = t;
         this.EnemyTurn();
         this.Comparison();
     }
-    EnemyTurn(){
-        switch(this.difficulty){
+    EnemyTurn() {
+        switch (this.difficulty) {
             case "Random":
-            this.enemyTurn=this.Dict[Math.floor(Math.random() * this.Dict.length)];                       
-            break;
+                this.enemyTurn = this.Dict[Math.floor(Math.random() * this.Dict.length)];
+                break;
             case "Medium":
 
-            break;
+                break;
             case "Hard":
 
-            break;
+                break;
         }
-    this.enemyTurnsHistory.push(this.enemyTurn);
+        this.enemyTurnsHistory.push(this.enemyTurn);
     }
-    Comparison(){
-        if (this.enemyTurn==this.playerTurn){
+    Comparison() {
+        if (this.enemyTurn == this.playerTurn) {
         }
-        if(this.enemyTurn=="✊" && this.playerTurn=="✋"){
+        if (this.enemyTurn == "✊" && this.playerTurn == "✋") {
             this.playerScore++;
         }
-        if(this.enemyTurn=="✊" && this.playerTurn=="✌️"){
+        if (this.enemyTurn == "✊" && this.playerTurn == "✌️") {
             this.enemyScore++;
         }
-        if(this.enemyTurn=="✋" && this.playerTurn=="✊"){
+        if (this.enemyTurn == "✋" && this.playerTurn == "✊") {
             this.enemyScore++;
         }
-        if(this.enemyTurn=="✋" && this.playerTurn=="✌️"){
+        if (this.enemyTurn == "✋" && this.playerTurn == "✌️") {
             this.playerScore++;
         }
-        if(this.enemyTurn=="✌️" && this.playerTurn=="✊"){
+        if (this.enemyTurn == "✌️" && this.playerTurn == "✊") {
             this.playerScore++;
         }
-        if(this.enemyTurn=="✌️" && this.playerTurn=="✋"){
+        if (this.enemyTurn == "✌️" && this.playerTurn == "✋") {
             this.enemyScore++;
         }
     }
-    WinLoseChecker(){
-        let d=this.playerScore-this.enemyScore;
-        if(d>=3){
-            this.completed=true;
-            this.won=true;
+    WinLoseChecker() {
+        let d = this.playerScore - this.enemyScore;
+        if (d >= 3) {
+            this.completed = true;
+            this.won = true;
+            let win = new SoundEntity("Sounds/Win.mp3");
+            win.Play();
             this.winaction();
         }
-        if(d<=-3){
-            this.completed=true;
-            this.won=false;
+        if (d <= -3) {
+            this.completed = true;
+            this.won = false;
+            let lose = new SoundEntity("Sounds/Lose.mp3");
+            lose.Play();
             this.loseaction();
         }
     }

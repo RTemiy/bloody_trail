@@ -18,24 +18,24 @@ class Element {
         if (close == true) {
             this.Close();
         }
-        this.path = document.querySelector(""+this.id);
+        this.path = document.querySelector("" + this.id);
     }
     Open() {
-        document.write("<"+this.type+" id='"+this.id+"'>");
+        document.write("<" + this.type + " id='" + this.id + "'>");
     }
     Close() {
-        document.write("</"+this.type+">");
+        document.write("</" + this.type + ">");
     }
     Change(att, value) {
         let a = "document.getElementById(this.id)";
-        let b = eval(a+"."+att+"="+"value");
+        let b = eval(a + "." + att + "=" + "value");
     }
     GetValue() {
         return (document.getElementById(this.id).innerHTML);
     }
     SetAttribute(att, value) {
         let a = "document.getElementById(this.id)";
-        let b = eval(a+".setAttribute("+"att"+","+'value)');
+        let b = eval(a + ".setAttribute(" + "att" + "," + 'value)');
     }
     HideOrNot(w) {
         if (w == true) {
@@ -52,61 +52,60 @@ class Element {
             this.Change("hidden", false);
         }
     }
-    SetRef(r, a, aa,aar) {
+    SetRef(r, a, aa, aar) {
         this.ref = r;
         this.NeedRef = true;
         this.aref = a;
         this.aa = aa;
         this.aaref = aar;
     }
-    SetBasicRef(){
+    SetBasicRef() {
         if (this.NeedRef == true) {
             this.Change("innerHTML", this.ref());
-                this.SetOnClickRef();
-        this.HiddenChecker();
+            this.SetOnClickRef();
+            this.HiddenChecker();
         }
     }
-    SetOnClickRef(){
+    SetOnClickRef() {
         if (this.aref != undefined) {
-                this.SetAttribute("onclick", ""+ this.aref());
-            }
-    }
-    SetAdditionalAttribute(){
-        if(this.aa != ""){
-            if(this.aaref != ""){
-                this.Change(this.aa, this.aaref);
-            }                
+            this.SetAttribute("onclick", "" + this.aref());
         }
     }
-    HiddenChecker(){
-       if (this.HideOnEmpty == true) {
-                if (this.ref()+"" == "") {
-                    this.HideOrNot(true);
-                } else {
-                    this.HideOrNot(false);
-                }
-            } 
+    SetAdditionalAttribute() {
+        if (this.aa != "") {
+            if (this.aaref != "") {
+                this.Change(this.aa, this.aaref);
+            }
+        }
     }
-
+    HiddenChecker() {
+        if (this.HideOnEmpty == true) {
+            if (this.ref() + "" == "") {
+                this.HideOrNot(true);
+            } else {
+                this.HideOrNot(false);
+            }
+        }
+    }
     ApplyRef() {
-        this.SetBasicRef();      
-        this.SetAdditionalAttribute();     
+        this.SetBasicRef();
+        this.SetAdditionalAttribute();
     }
 }
 
 //INTERFACE
 class Interface {
-    constructor () {
+    constructor() {
         this.Element = [];
         this.Elements = [];
     }
     Refresh() {
         for (var m in this.Element) {
-            eval("this.Element."+m+".ApplyRef();");
+            eval("this.Element." + m + ".ApplyRef();");
         }
         for (var n in this.Elements) {
-            for (var o = 0; o < eval("this.Elements."+n+".length"); o++) {
-                eval("this.Elements."+n+"["+o+"]"+".ApplyRef();");
+            for (var o = 0; o < eval("this.Elements." + n + ".length"); o++) {
+                eval("this.Elements." + n + "[" + o + "]" + ".ApplyRef();");
             }
         }
     }
@@ -114,16 +113,16 @@ class Interface {
 
 //SOUNDENGINE
 class SoundEntity {
-    constructor(l){
+    constructor(l) {
         this['audio'] = new Audio(l);
     }
-    Play(){
+    Play() {
         this['audio'].pause();
         this['audio'].play();
     }
-    Change(l){
+    Change(l) {
         this['audio'].pause();
-        this['audio'] = new Audio(s);
-        this['audio'].Play();
+        this['audio'] = new Audio(l);
+        this['audio'].play();
     }
 }
