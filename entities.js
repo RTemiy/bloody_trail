@@ -7,6 +7,7 @@ class Entity {
         this.Name = values.name || "Unknown";
         this.Title = values.title || "";
         this.Level = values.level || 0;
+        this.Cost = values.cost || 0;
         this.Money = values.money || 0;
         this.Health = values.health || 0;
         this.Armor = values.armor || 0;
@@ -19,7 +20,13 @@ class Entity {
         this.Intellegence = values.intellegence || 0;
         this.Luck = values.luck || 0;
         this.Completed = values.completed || false;
-        this.RLevel = values.rlevel || 1;
+    }
+}
+
+//CHARACTER
+class Character extends Entity{
+    constructor(values){
+        super(values);
         this.MinHealth = values.minhealth || 0;
         this.MaxHealth = values.health;
         this.Bag = values.inventory || null;
@@ -86,12 +93,22 @@ class Entity {
         this.Money += entity.Money;
         entity.Completed = true;
     }
+    Buy(entity){
+        if(entity.Cost <= this.Money && this.Bag.HavePlace()==true){
+            this.Money-=entity.Cost;
+            this.Bag.AddItem(entity);
+        }
+    }
     LiveLife() {
         this.Score += 2;
         this.Hunger -= 1;
         if (this.Hunger < 1) {
             this.Hunger = 0;
             this.Health -= 1;
+        }
+        if (this.Stress > 100) {
+            this.Stress = 100;
+            this.Health -= 25;
         }
     }
 }
@@ -145,14 +162,10 @@ class Inventory {
         }
         if (amount == this.MaxCells) {
             return(false);
+        } 
+        else {
+            return (true);
         }
-    }
-}
-
-//WORLD
-class World {
-    constructor(p) {
-        this.Player = p;
     }
 }
 

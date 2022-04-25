@@ -1,18 +1,53 @@
 //ITEMS
-const Entities = [
-    new Entity({
-        type: "Item",
-        icon: "🥔",
-        name: "🥔 Печёный картофель",
-        title: "Он уже конечно невкусный...",
-        money: 1,
-        health: 10,
-        poison: 5,
-        stress: 0,
-        hunger: 20,
-        rlevel: 1
-    }),
-];
+const Entities = [];
+Entities["🥔"] = new Entity({
+    type: "Item",
+    icon: "🥔",
+    name: "🥔 Печёный картофель",
+    title: "Он уже конечно невкусный...",
+    cost: 2,
+    money: 1,
+    health: 10,
+    poison: 5,
+    stress: 0,
+    hunger: 20,
+});
+Entities["🍖"] = new Entity({
+    type: "Item",
+    icon: "🍖",
+    name: "🍖 Окорок",
+    title: "Такой сочный и такой жирный— про голод можно будет забыть на долго",
+    cost: 5,
+    money: 2,
+    health: 50,
+    poison: 5,
+    stress: 0,
+    hunger: 100,
+});
+Entities["🍗"] = new Entity({
+    type: "Item",
+    icon: "🍗",
+    name: "🍗 Куриные ножки",
+    title: "Что-то очень напопинает, пальчики оближешь!",
+    cost: 2,
+    money: 1,
+    health: 10,
+    poison: 10,
+    stress: 0,
+    hunger: 25,
+});
+Entities["🍺"] = new Entity({
+    type: "Item",
+    icon: "🍺",
+    name: "🍺 Пиво",
+    title: "Не стоит перебарщивать с этим напитком...",
+    cost: 1,
+    money: 1,
+    health: 10,
+    poison: 25,
+    stress: 25,
+    hunger: 10,
+});
 
 //STORYLINE
 
@@ -63,11 +98,11 @@ Q04 = new Dialog({
     buttontext03: "+1 к интеллекту",
     buttontext04: "+1 к удаче",
     buttontext05: "+5 золотых монет",
-    buttonaction01: "MainStreet.Set();Kingdom.Player.Strength+=1;",
-    buttonaction02: "MainStreet.Set();Kingdom.Player.Agility+=1;",
-    buttonaction03: "MainStreet.Set();Kingdom.Player.Intellegence+=1;",
-    buttonaction04: "MainStreet.Set();Kingdom.Player.Luck+=1;",
-    buttonaction05: "MainStreet.Set();Kingdom.Player.Money+=5;",
+    buttonaction01: "MainStreet.Set();Player.Strength+=1;",
+    buttonaction02: "MainStreet.Set();Player.Agility+=1;",
+    buttonaction03: "MainStreet.Set();Player.Intellegence+=1;",
+    buttonaction04: "MainStreet.Set();Player.Luck+=1;",
+    buttonaction05: "MainStreet.Set();Player.Money+=5;",
 });
 
 MainStreet = new Dialog({
@@ -90,7 +125,7 @@ Tavern = new Dialog({
     buttontext03: "Пообщаться с владельцем таверны",
     buttontext04: "Попытать удачу в 'камень, ножницы, бумага'",
     buttontext05: "Уйти",
-    buttonaction01: "",
+    buttonaction01: "TavernFood.Set()",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "TavernGame.Set()",
@@ -98,13 +133,28 @@ Tavern = new Dialog({
     ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3"),
 });
 
+TavernFood = new Dialog({
+    name: "🤵🏼‍♀️ Официантка",
+    text: "Добрейшего времени суток! Я могу предложить наш фирменный окорок за 5 золотых, но если вы хотите что-то по-бюджетнее, то возьмите хрустящие куриные ножки за 2 золотых, из напитков у нас только пиво по 1 золотому за пинту!",
+    buttontext01: "🍖 Окорок",
+    buttontext02: "🍗 Куриные ножки",
+    buttontext03: "🍺 Пиво",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "Player.Buy(Entities['🍖'])",
+    buttonaction02: "Player.Buy(Entities['🍗'])",
+    buttonaction03: "Player.Buy(Entities['🍺'])",
+    buttonaction04: "",
+    buttonaction05: "Tavern.Set();",
+});
+
 TavernGame = new Dialog({
     name: "🧖🏻‍♂️Местный доходяга",
     text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
     game : new RockPaperScissors(
         "Random",
-        ()=>{Tavern.Set(),Kingdom.Player.Money++,Kingdom.Player.Stress+=15},
-        ()=>{Tavern.Set(),Kingdom.Player.Money-=1,Kingdom.Player.Stress+=25},)
+        ()=>{Tavern.Set(),Player.Money++,Player.Stress+=15},
+        ()=>{Tavern.Set(),Player.Money-=1,Player.Stress+=25},)
 });
 
 MarketPlace = new Dialog({
@@ -178,7 +228,7 @@ WitcherQuest01 = new Dialog({
     buttontext04: "",
     buttontext05: "",
     buttonaction01: "MainStreet.Set(); WitcherQuest01.ButtonActive[0]=false",
-    buttonaction02: "Kingdom.Player.Money-=5",
+    buttonaction02: "Player.Money-=5",
     buttonaction03: "MainStreet.Set()",
     buttonaction04: "",
     buttonaction05: "",

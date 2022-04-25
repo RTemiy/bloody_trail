@@ -5,12 +5,12 @@ interface.js
 script.js
 */
 //VARIABLES
-UMI = new Interface();
-RPS = new RockPaperScissors('Random');
-Kingdom = new World(
-    new Entity({
+var UMI = new Interface();
+var RPS = new RockPaperScissors('Random');
+var Player = new Character({
         name: "🌡 Показатели персонажа:",
         level: 1,
+        type: "Player",
         money: 0,
         health: 100,
         armor: 0,
@@ -23,8 +23,7 @@ Kingdom = new World(
         intellegence: 0,
         luck: 0,
         inventory: new Inventory(9),
-    })
-);
+    });
 
 //PROGRAM BODY
 function InitDialog () {
@@ -112,10 +111,10 @@ function InitInventory () {
     UMI.Element.PlayerMenuInventory.Change("innerHTML", "🎒 Рюкзак");
     new Element("hr");
     UMI.Elements.PlayerInventory = [];
-    for (x = 0; x < Kingdom.Player.Bag.MaxCells; x++) {
+    for (x = 0; x < Player.Bag.MaxCells; x++) {
         UMI.Elements.PlayerInventory.push(new Element('button', 'inv'+x));
         UMI.Elements.PlayerInventory[x].SetAttribute("class", "invitem");
-        UMI.Elements.PlayerInventory[x].SetAttribute("onclick", "Kingdom.Player.Use(Kingdom.Player.Bag.Items["+x+"]);");
+        UMI.Elements.PlayerInventory[x].SetAttribute("onclick", "Player.Use(Player.Bag.Items["+x+"]);");
     }
     UMI.Element.InventoryBlock.Close();
 }
@@ -132,52 +131,52 @@ function SetReferences() {
         return(RPS.playerTurn)});
      //PlayerStatistics
     UMI.Element.PlayerLevel.SetRef(()=> {
-        return(Kingdom.Player.Level)});
+        return(Player.Level)});
     UMI.Element.PlayerMoney.SetRef(()=> {
-        return(Kingdom.Player.Money)});
+        return(Player.Money)});
     UMI.Element.PlayerDamage.SetRef(()=> {
-        return(Kingdom.Player.Damage)});
+        return(Player.Damage)});
     UMI.Element.HealthBar.SetRef(()=> {
-        return(Kingdom.Player.Health)});
+        return(Player.Health)});
     UMI.Element.HungerBar.SetRef(()=> {
-        return(Kingdom.Player.Hunger)});
+        return(Player.Hunger)});
     UMI.Element.StressBar.SetRef(()=> {
-        return(Kingdom.Player.Stress)});
+        return(Player.Stress)});
     UMI.Element.PoisonBar.SetRef(()=> {
-        return(Kingdom.Player.Poison)});
+        return(Player.Poison)});
     UMI.Element.PlayerMenu.SetRef(()=> {
-        return(Kingdom.Player.Name)});
+        return(Player.Name)});
     UMI.Element.PlayerStrength.SetRef(()=> {
-        return(Kingdom.Player.Strength)});
+        return(Player.Strength)});
     UMI.Element.PlayerAgility.SetRef(()=> {
-        return(Kingdom.Player.Agility)});
+        return(Player.Agility)});
     UMI.Element.PlayerIntellegence.SetRef(()=> {
-        return(Kingdom.Player.Intellegence)});
+        return(Player.Intellegence)});
     UMI.Element.PlayerLuck.SetRef(()=> {
-        return(Kingdom.Player.Luck)});
+        return(Player.Luck)});
     UMI.Element.PlayerArmor.SetRef(()=> {
-        return(Kingdom.Player.Armor)});
+        return(Player.Armor)});
     UMI.Element.PlayerScore.SetRef(()=> {
-        return(Kingdom.Player.Score)});
+        return(Player.Score)});
     //PlayerBag
     UMI.Elements.PlayerInventory[0].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[0].Icon)},);
+        return(Player.Bag.Items[0].Icon)},);
     UMI.Elements.PlayerInventory[1].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[1].Icon)});
+        return(Player.Bag.Items[1].Icon)});
     UMI.Elements.PlayerInventory[2].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[2].Icon)});
+        return(Player.Bag.Items[2].Icon)});
     UMI.Elements.PlayerInventory[3].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[3].Icon)});
+        return(Player.Bag.Items[3].Icon)});
     UMI.Elements.PlayerInventory[4].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[4].Icon)});
+        return(Player.Bag.Items[4].Icon)});
     UMI.Elements.PlayerInventory[5].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[5].Icon)});
+        return(Player.Bag.Items[5].Icon)});
     UMI.Elements.PlayerInventory[6].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[6].Icon)});
+        return(Player.Bag.Items[6].Icon)});
     UMI.Elements.PlayerInventory[7].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[7].Icon)});
+        return(Player.Bag.Items[7].Icon)});
     UMI.Elements.PlayerInventory[8].SetRef(()=> {
-        return(Kingdom.Player.Bag.Items[8].Icon)});
+        return(Player.Bag.Items[8].Icon)});
 }
 
 function InitRPS(){
@@ -228,7 +227,7 @@ function CreateInterface() {
     InitInventory();
     SetReferences();
     setInterval(()=>UMI.Refresh(), 100);
-    setInterval(()=>Kingdom.Player.LiveLife(), 2000);
+    setInterval(()=>Player.LiveLife(), 2000);
     UMI.Element.Version = new Element ("a", "Version");
     UMI.Element.Version.Change("innerHTML", "version: 🎲0.02rps");
 }
