@@ -128,7 +128,7 @@ Tavern = new Dialog({
     buttonaction01: "TavernFood.Set()",
     buttonaction02: "",
     buttonaction03: "",
-    buttonaction04: "TavernGame.Set()",
+    buttonaction04: "if(Player.Money>=1){TavernGame.Set()}else{alert('Не хватает денег!');}",
     buttonaction05: "MainStreet.Set()",
     ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3"),
 });
