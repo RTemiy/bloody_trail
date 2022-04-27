@@ -58,12 +58,13 @@ class Element {
         this.aref = a;
         this.aa = aa;
         this.aaref = aar;
+        setInterval(() => this.ApplyRef(), 100);
     }
     SetBasicRef() {
         if (this.NeedRef == true) {
             this.Change("innerHTML", this.ref());
             this.SetOnClickRef();
-            this.HiddenChecker();
+
         }
     }
     SetOnClickRef() {
@@ -72,11 +73,12 @@ class Element {
         }
     }
     SetAdditionalAttribute() {
-        if (this.aa != "") {
-            if (this.aaref != "") {
-                this.Change(this.aa, this.aaref);
-            }
-        }
+                try {
+                    this.Change(this.aa, this.aaref());
+                    if (this.ref() + "" == "") {
+                        this.HideOrNot(true);}
+                }
+                catch (e) { }
     }
     HiddenChecker() {
         if (this.HideOnEmpty == true) {
@@ -88,26 +90,9 @@ class Element {
         }
     }
     ApplyRef() {
-        this.SetBasicRef();
-        this.SetAdditionalAttribute();
-    }
-}
-
-//INTERFACE
-class Interface {
-    constructor() {
-        this.Element = [];
-        this.Elements = [];
-    }
-    Refresh() {
-        for (var m in this.Element) {
-            eval("this.Element." + m + ".ApplyRef();");
-        }
-        for (var n in this.Elements) {
-            for (var o = 0; o < eval("this.Elements." + n + ".length"); o++) {
-                eval("this.Elements." + n + "[" + o + "]" + ".ApplyRef();");
-            }
-        }
+        this.SetBasicRef();      
+        this.HiddenChecker();  
+        this.SetAdditionalAttribute();        
     }
 }
 

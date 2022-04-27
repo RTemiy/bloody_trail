@@ -55,6 +55,8 @@ Entities["🍺"] = new Entity({
 = new Dialog({
     name: "",
     text: "",
+    alternative: ,
+    game: ,
     buttontext01: "",
     buttontext02: "",
     buttontext03: "",
@@ -68,29 +70,39 @@ Entities["🍺"] = new Entity({
 });
 */
 
-Q01 = new Dialog({
+var Script = [];
+Script.Actual;
+Script.Set = function (a){
+    Script[a].Set();
+    Script.Actual= a;
+}
+
+Script["Q01"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Добро пожаловать! О чём ты хочешь знать?",
+    buttonactive01: true,
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
-    buttonaction01: "Q02.Set()",
-    buttonaction02: "Q04.Set()",
+    buttonaction01: "Script.Set('Q02')",
+    buttonaction02: "Script.Set('Q04')",
 });
 
-Q02 = new Dialog({
+Script["Q02"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Эта игра представляет из себя, текстовый квест. В данном проекте реализовано: инвентарь, диалоги, сражения и показатели игрока",
     buttontext01: "Понятно",
-    buttonaction01: "Q03.Set()",
+    buttonaction01: "Script.Set('Q03')",
     music: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Intro.mp3"),
 });
-Q03 = new Dialog({
+
+Script["Q03"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Сверху можно узнать, с кем ты общаешься, далее текст и кнопки выбора действий. Следующее меню— это показатели персонажа. <p> Уровень—🏆 Деньги—💰 Урон—🗡<p> Здоровье—❤ Голод—🍽 Стресс—🤯 Отравление—🤢 <p> Сила—💪 Ловкость—🦶 Интеллект—🧠 Удача—🍀 <p>Броня—🛡 Шаги—👣<p> Далее инвентарь. Есть используемые и носимые предметы. Используемые дают бонус единожды при нажатии, а носимые дают бонус пока находятся в инвентаре ",
     buttontext01: "Хмм... Думаю всё понятно!",
-    buttonaction01: "Q04.Set()",
+    buttonaction01: "Script.Set('Q04')",
 });
-Q04 = new Dialog({
+
+Script["Q04"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Раз уж, пока вопросов нет, то можно отправиться в путешествие, но сначала давай определимся с твоими характеристиками. Выбери 1 показатель, который ты бы хотел улучшить",
     buttontext01: "+1 к силе",
@@ -98,26 +110,26 @@ Q04 = new Dialog({
     buttontext03: "+1 к интеллекту",
     buttontext04: "+1 к удаче",
     buttontext05: "+5 золотых монет",
-    buttonaction01: "MainStreet.Set();Player.Strength+=1;",
-    buttonaction02: "MainStreet.Set();Player.Agility+=1;",
-    buttonaction03: "MainStreet.Set();Player.Intellegence+=1;",
-    buttonaction04: "MainStreet.Set();Player.Luck+=1;",
-    buttonaction05: "MainStreet.Set();Player.Money+=5;",
+    buttonaction01: "Script.Set('MainStreet');Player.Strength+=1;",
+    buttonaction02: "Script.Set('MainStreet');Player.Agility+=1;",
+    buttonaction03: "Script.Set('MainStreet');Player.Intellegence+=1;",
+    buttonaction04: "Script.Set('MainStreet');Player.Luck+=1;",
+    buttonaction05: "Script.Set('MainStreet');Player.Money+=5;",
 });
 
-MainStreet = new Dialog({
+Script["MainStreet"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Перед тобой открывается небольшой средневековый город. Люди торопятся по своим делам. Вдалеке, прямо по дороге виден рынок, слева— лавка ведьмака, а справа таверна",
     buttontext01: "Пойти к рынку",
     buttontext02: "Зайти к ведьмаку",
     buttontext03: "Направиться к таверне",
-    buttonaction01: "MarketPlace.Set()",
-    buttonaction02: "WitcherStore.Set()",
-    buttonaction03: "Tavern.Set()",
+    buttonaction01: "Script.Set('MarketPlace')",
+    buttonaction02: "Script.Set('WitcherStore')",
+    buttonaction03: "Script.Set('Tavern')",
     ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/MainStreet.mp3"),
 });
 
-Tavern = new Dialog({
+Script["Tavern"] = new Dialog({
     name: "📖 Рассказчик",
     text: "В любое время здесь шум и гам: пьяные спорят, официанты носятся в суматохе, а местный кот с наслаждением созерцает столь прекрасную картину",
     buttontext01: "Заказать перекус",
@@ -125,15 +137,15 @@ Tavern = new Dialog({
     buttontext03: "Пообщаться с владельцем таверны",
     buttontext04: "Попытать удачу в 'камень, ножницы, бумага'",
     buttontext05: "Уйти",
-    buttonaction01: "TavernFood.Set()",
+    buttonaction01: "Script.Set('TavernFood')",
     buttonaction02: "",
     buttonaction03: "",
-    buttonaction04: "if(Player.Money>=1){TavernGame.Set()}else{alert('Не хватает денег!');}",
-    buttonaction05: "MainStreet.Set()",
+    buttonaction04: "if(Player.Money>=1){Script.Set('TavernGame')}else{alert('Не хватает денег!');}",
+    buttonaction05: "Script.Set('MainStreet')",
     ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3"),
 });
 
-TavernFood = new Dialog({
+Script["TavernFood"] = new Dialog({
     name: "🤵🏼‍♀️ Официантка",
     text: "Добрейшего времени суток! Я могу предложить наш фирменный окорок за 5 золотых, но если вы хотите что-то по-бюджетнее, то возьмите хрустящие куриные ножки за 2 золотых, из напитков у нас только пиво по 1 золотому за пинту!",
     buttontext01: "🍖 Окорок",
@@ -145,19 +157,19 @@ TavernFood = new Dialog({
     buttonaction02: "Player.Buy(Entities['🍗'])",
     buttonaction03: "Player.Buy(Entities['🍺'])",
     buttonaction04: "",
-    buttonaction05: "Tavern.Set();",
+    buttonaction05: "Script.Set('Tavern');",
 });
 
-TavernGame = new Dialog({
+Script["TavernGame"] = new Dialog({
     name: "🧖🏻‍♂️Местный доходяга",
     text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
     game: new RockPaperScissors(
         "Random",
-        () => { Tavern.Set(), Player.Money++, Player.Stress += 15 },
-        () => { Tavern.Set(), Player.Money -= 1, Player.Stress += 25 })
+        () => { Script.Set('Tavern'), Player.Money++, Player.Stress += 15 },
+        () => { Script.Set('Tavern'), Player.Money -= 1, Player.Stress += 25 })
 });
 
-MarketPlace = new Dialog({
+Script["MarketPlace"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Вот он— классический средневековый рынок. Где-то торговка пытается договориться о выгодной сделке. Рядом с её лавкой кузница, где мастер куёт оружие для всего города",
     buttontext01: "Подойти к торговке",
@@ -169,10 +181,10 @@ MarketPlace = new Dialog({
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
-    buttonaction05: "MainStreet.Set()",
+    buttonaction05: "Script.Set('MainStreet')",
 });
 
-WitcherStore = new Dialog({
+Script["WitcherStore"] = new Dialog({
     name: "🦹🏻‍♂️ Ведьмак",
     text: "Дверь в лавку неприятно скрипит; ведьмака это не тревожит. В дальнем углу, между ящиками он разбирает склад трав. Также поражает огромный стеллаж с книгами. Где-то колдовство, где-то травничество и забавно, что есть книги по кулинарии",
     buttontext01: "Поговорить с ведьмаком",
@@ -180,57 +192,58 @@ WitcherStore = new Dialog({
     buttontext03: "",
     buttontext04: "",
     buttontext05: "Уйти",
-    buttonaction01: "Witcher01.Set()",
+    buttonaction01: "Script.Set('Witcher01')",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
-    buttonaction05: "MainStreet.Set()",
+    buttonaction05: "Script.Set('MainStreet')",
 });
 
-Witcher01 = new Dialog({
+Script["Witcher01"] = new Dialog({
+    name: "🦹🏻‍♂️ Ведьмак",
     text: "Я сейчас очень занят, поэтому попрошу меня не отвлекать, хотя если ты ищешь работу, есть у меня парочка заданий",
     alternative: function () {
-        WitcherQuest01.Set()
+        Script.Set("WitcherQuest01")
     },
     buttontext01: "Поговорить о задании",
     buttontext02: "",
     buttontext03: "",
     buttontext04: "",
     buttontext05: "Уйти",
-    buttonaction01: "Witcher02.Set()",
+    buttonaction01: "Script.Set('Witcher02')",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
-    buttonaction05: "MainStreet.Set()",
+    buttonaction05: "Script.Set('MainStreet')",
 });
 
-Witcher02 = new Dialog({
-    name: "",
+Script["Witcher02"] = new Dialog({
+    name: "🦹🏻‍♂️ Ведьмак",
     text: "Вот что я могу тебе предложить:",
     buttontext01: "Забрать долг",
     buttontext02: "",
     buttontext03: "",
     buttontext04: "",
     buttontext05: "Уйти",
-    buttonaction01: "WitcherQuest01.Set()",
+    buttonaction01: "Script.Set('WitcherQuest01')",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
-    buttonaction05: "MainStreet.Set()",
+    buttonaction05: "Script.Set('MainStreet')",
 });
 
-WitcherQuest01 = new Dialog({
-    name: "",
+Script["WitcherQuest01"] = new Dialog({
+    name: "🦹🏻‍♂️ Ведьмак",
     text: "Есть одна книга— Продвинутое травничество. Кто-то взял её из библиотеки, она мне очень нужна. Дам за неё 5 золотых",
     buttontext01: "Взять задание",
     buttontext02: "Задание выполнено",
-    buttonactive02: false,
+    buttonactive02: true,
     buttontext03: "Уйти",
     buttontext04: "",
     buttontext05: "",
-    buttonaction01: "MainStreet.Set(); WitcherQuest01.ButtonActive[0]=false",
+    buttonaction01: "Script.Set('MainStreet'); Script['WitcherQuest01'].ButtonActive[0]=true",
     buttonaction02: "Player.Money-=5",
-    buttonaction03: "MainStreet.Set()",
+    buttonaction03: "Script.Set('MainStreet')",
     buttonaction04: "",
     buttonaction05: "",
 });

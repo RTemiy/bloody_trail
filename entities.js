@@ -19,6 +19,7 @@ class Entity {
         this.Agility = values.agility || 0;
         this.Intellegence = values.intellegence || 0;
         this.Luck = values.luck || 0;
+        this.Charisma = values.charisma || 0;
         this.Completed = values.completed || false;
     }
 }
@@ -101,7 +102,7 @@ class Character extends Entity {
     }
     Buy(entity) {
         if (entity.Cost <= this.Money && this.Bag.HavePlace() == true) {
-            let money= new SoundEntity("Sounds/Money.mp3");
+            let money = new SoundEntity("Sounds/Money.mp3");
             money.Play();
             this.Money -= entity.Cost;
             this.Bag.AddItem(entity);
@@ -176,13 +177,13 @@ class Inventory {
     }
 }
 
-//DIALOG AND CHARACTER
+//DIALOG
 class Dialog {
     constructor(values) {
         var values = values || {};
         this.Name = values.name || "";
         this.Text = values.text || "";
-        this.Active = values.active || true;
+        this.Active = values.active;
         this.Alternative = values.alternative || "";
         this.Game = values.game;
         this.ButtonText = [];
@@ -221,35 +222,14 @@ class Dialog {
     MainActivity() {
         this.SetGame();
         this.ActivateSounds();
-        this.ChangeTitle();
-        this.ChangeButtons();
-
-    }
-    ChangeTitle() {
-        if (this.Name != "") {
-            UMI.Element.DialogTitle.Change("innerHTML", this.Name);
-        }
-        UMI.Element.Dialog.Change("innerHTML", this.Text);
-    }
-    ChangeButtons() {
-        for (var x = 0; x < 5; x++) {
-            UMI.Elements.SelectionButtons[x].Change("innerHTML", this.ButtonText[x]);
-            UMI.Elements.SelectionButtons[x].SetAttribute("onclick", this.ButtonAction[x]);
-            if (this.ButtonText[x] != "") {
-                UMI.Elements.SelectionButtons[x].HideOrNot(false);
-            }
-            if (this.ButtonText[x] == "" || this.ButtonActive[x] == false) {
-                UMI.Elements.SelectionButtons[x].HideOrNot(true);
-            }
-        }
     }
     SetGame() {
         if (this.Game != undefined) {
             RPS = new RockPaperScissors(this.Game.difficulty, this.Game.winaction, this.Game.loseaction);
-            UMI.Element.RPSBlock.HideOrNot(false);
+            UMI.RPSBlock.HideOrNot(false);
         }
         else {
-            UMI.Element.RPSBlock.HideOrNot(true);
+            UMI.RPSBlock.HideOrNot(true);
         }
     }
     ActivateSounds() {
@@ -334,6 +314,41 @@ class RockPaperScissors {
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
             this.loseaction();
+        }
+    }
+}
+
+class SkillTest {
+    constructor(d, w, l) {
+        this.difficulty = d;
+        this.winaction = w;
+        this.loseaction = l;
+        this.dice = 20;
+    }
+    Check(CharacterChar) {
+        this.SwitchDifficulty();
+        var res = Math.floor(Math.random() * this.dice) + CharacterChar;
+        if (res >= this.difficulty) {
+            this.winaction();
+        }
+        else {
+            this.loseaction();
+        }
+    }
+    SwitchDifficulty() {
+        switch (this.difficulty) {
+            case "Easy":
+                this.difficulty = 10;
+                break;
+            case "Medium":
+                this.difficulty = 12;
+                break;
+            case "Hard":
+                this.difficulty = 15;
+                break;
+            case "Critical":
+                this.difficulty = 20;
+                break;
         }
     }
 }
