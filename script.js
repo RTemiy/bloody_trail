@@ -22,6 +22,7 @@ Entities["🍖"] = new Entity({
     health: 50,
     poison: 5,
     stress: 0,
+    energy: 100,
     hunger: 100,
 });
 Entities["🍗"] = new Entity({
@@ -34,6 +35,7 @@ Entities["🍗"] = new Entity({
     health: 10,
     poison: 10,
     stress: 0,
+    energy: 50,
     hunger: 25,
 });
 Entities["🍺"] = new Entity({
@@ -46,6 +48,7 @@ Entities["🍺"] = new Entity({
     health: 10,
     poison: 25,
     stress: 25,
+    energy: 25,
     hunger: 10,
 });
 
@@ -77,7 +80,7 @@ Script.Set = function (a) {
     Script.Actual = a;
 }
 
-Script["Q01"] = new Dialog({
+Script["Start"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Добро пожаловать! О чём ты хочешь знать?",
     buttontext01: "Как всё работает?",

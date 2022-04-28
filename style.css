@@ -2,13 +2,14 @@
   box-sizing: border-box;
 }
 body {
-  font-size: 15px;
+  font: "URW Bookman L", serif;
   width: 400px;
 }
 button {
+  font: 15px "URW Palladio L", serif;
   border-radius: 5px;
+  border-width: 2px;
   margin-left: 5px;
-  border: ;
   height: 30px;
   background: rgb(214, 214, 214);
   opacity: 1;
@@ -22,16 +23,15 @@ div {
   width: 400px;
   background: rgba(196,196,196,1);
   overflow: hidden;
+  margin-bottom: 2px;
 }
 .invitem {
-  border: 5px;
-  border-radius: 5px;
+  border-width: 1px;
   height: 60px;
   width: 60px;
   margin: 0px;
   font-size: 200%;
-  border-color: white;
-  opacity: 1;
+  border-color: rgb(133, 133, 133);
 }
 .invblock {
   width: 190px;

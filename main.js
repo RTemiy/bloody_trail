@@ -22,12 +22,14 @@ var Player = new Character({
     intelligence: 0,
     charisma: 0,
     luck: 0,
+    energy: 100,
     inventory: new Inventory(9),
 });
 
 //PROGRAM BODY
 function InitDialog() {
     UMI.DialogBlock = new Element("div", "DialogBlock", false);
+    InitRPS();
     UMI.DialogBlock.SetAttribute("class", "dialogblock");
     UMI.DialogTitle = new Element("p", "DialogTitle");
     new Element("hr");
@@ -38,7 +40,6 @@ function InitDialog() {
     for (var u = 0; u < 5; u++) {
         UMI.SelectionButtons.push(new Element("button", "SelectionButton" + u));
     }
-    InitRPS();
     UMI.DialogBlock.Close();  
 }
 
@@ -102,9 +103,9 @@ function InitPlayerStats() {
     UMI.PlayerArmorIcon.Change("innerHTML", " 🎽 ");
     UMI.PlayerArmor = new Element('a', 'PArmor');
     UMI.PlayerArmor.SetAttribute("class", "healthbar");
-    UMI.PlayerScoreIcon = new Element("a", "PScoreI");
-    UMI.PlayerScoreIcon.Change("innerHTML", "⠀| 👣 ");
-    UMI.PlayerScore = new Element('a', 'score');
+    UMI.PlayerScoreIcon = new Element("a", "PEnergyI");
+    UMI.PlayerScoreIcon.Change("innerHTML", "⠀| ⚡️ ");
+    UMI.PlayerScore = new Element('a', 'energy');
     UMI.PlayerScore.SetAttribute("class", "healthbar");
     UMI.PlayerBlock.Close();
 }
@@ -125,6 +126,8 @@ function InitInventory() {
 }
 //()=>{return()}
 function SetReferences() {
+    //PlayerAction
+    UMI.DialogBlock.HideOrNot(Player.Completed);
     UMI.RPSBlock.HideOrNot(Script[Script.Actual].RPS.completed);
     //Title and text
     UMI.DialogTitle.SetRef(Script[Script.Actual].Name);
@@ -179,7 +182,7 @@ function SetReferences() {
     UMI.PlayerCharisma.SetRef(Player.Charisma);
     UMI.PlayerLuck.SetRef(Player.Luck);
     UMI.PlayerArmor.SetRef(Player.Armor);
-    UMI.PlayerScore.SetRef(Player.Score);
+    UMI.PlayerScore.SetRef(Player.Energy);
     //PlayerBag
     UMI.PlayerInventory[0].SetRef(Player.Bag.Items[0].Icon);
     UMI.PlayerInventory[1].SetRef(Player.Bag.Items[1].Icon);
@@ -235,15 +238,15 @@ function CreateInterface() {
     InitPlayerStats();
     InitInventory();
     setInterval(() => SetReferences(), 100);
-    setInterval(() => Player.LiveLife(), 2000);
+    
     UMI.Version = new Element("a", "Version");
     UMI.Version.Change("innerHTML", "version: 🎲0.02rps");
 }
 
 function Main() {
-    Script.Set("Q01");
+    Script.Set("Start");
     CreateInterface();
-
+    Player.Start();
 }
 
 Main();

@@ -15,6 +15,7 @@ class Entity {
         this.Stress = values.stress || 0;
         this.Poison = values.poison || 0;
         this.Hunger = values.hunger || 0;
+        this.Energy = values.energy || 0;
         this.Strength = values.strength || 0;
         this.Agility = values.agility || 0;
         this.Intelligence = values.intelligence || 0;
@@ -33,20 +34,17 @@ class Character extends Entity {
         this.Bag = values.inventory || null;
         this.Score = 0;
     }
-    AliveChecker(entity) {
-        if (entity.Health <= entity.MinHealth) {
-            entity.Completed = true;
-        }
-    }
     isAlive() {
-        if (this.Health <= this.MinHealth ||
-            this.Stress >= this.MaxHealth ||
-            this.Poison >= this.MaxHealth ||
-            this.Hunger <= this.MinHealth) {
+        if (this.Health <= 0 ||
+            this.Energy <= 0) {
             this.Completed = true;
         }
+        else{
+            this.Completed = false;
+        }        
     }
-    MinChecker() {
+    MinSolver() {
+        //Minimal values
         if (this.Stress <= 0) {
             this.Stress = 0;
         }
@@ -56,8 +54,27 @@ class Character extends Entity {
         if (this.Hunger >= 100) {
             this.Hunger = 100;
         }
-        if (this.Health >= this.MaxHealth) {
-            this.Health = this.MaxHealth;
+        if (this.Health >= 100) {
+            this.Health = 100;
+        }
+        if (this.Energy < 1) {
+            this.Energy = 0;
+        }
+        if (this.Energy >= 100) {
+            this.Energy = 100;
+        }
+        //Negative values
+        if (this.Hunger <= 0) {
+            this.Hunger = 0;
+            this.Health -= 3;
+        }
+        if (this.Poison >= 100) {
+            this.Poison = 100;
+            this.Health-=4
+        }
+        if (this.Stress >= 100) {
+            this.Stress = 100;
+            this.Health -= 2;
         }
     }
     Use(entity) {
@@ -78,9 +95,9 @@ class Character extends Entity {
                 this.Stress += entity.Stress;
                 this.Poison += entity.Poison;
                 this.Hunger += entity.Hunger;
+                this.Energy += entity.Energy;
                 entity.Icon = "";
                 entity.Completed = true;
-                this.MinChecker();
             }
         }
     }
@@ -94,7 +111,6 @@ class Character extends Entity {
         this.Hunger -= entity.Hunger;
         entity.Icon = "";
         entity.Completed = true;
-        this.MinChecker();
     }
     Sell(entity) {
         this.Money += entity.Money;
@@ -109,16 +125,13 @@ class Character extends Entity {
         }
     }
     LiveLife() {
-        this.Score += 2;
+        this.Energy -= 2;
         this.Hunger -= 1;
-        if (this.Hunger < 1) {
-            this.Hunger = 0;
-            this.Health -= 1;
-        }
-        if (this.Stress > 100) {
-            this.Stress = 100;
-            this.Health -= 25;
-        }
+        this.MinSolver();
+        this.isAlive();          
+    }
+    Start(){
+        setInterval(() => this.LiveLife(),2000);      
     }
 }
 
