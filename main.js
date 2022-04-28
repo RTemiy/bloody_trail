@@ -6,7 +6,6 @@ script.js
 */
 //VARIABLES
 var UMI = {};
-var RPS = new RockPaperScissors('Random');
 var Player = new Character({
     name: "🌡 Показатели персонажа:",
     level: 1,
@@ -124,131 +123,71 @@ function InitInventory() {
 }
 //()=>{return()}
 function SetReferences() {
+    UMI.RPSBlock.HideOrNot(Script[Script.Actual].RPS.completed);
     //Title and text
-    UMI.DialogTitle.SetRef(() => {
-        return (Script[Script.Actual].Name)
-    });
-    UMI.Dialog.SetRef(() => {
-        return (Script[Script.Actual].Text)
-    });
+    UMI.DialogTitle.SetRef(Script[Script.Actual].Name);
+    UMI.Dialog.SetRef(Script[Script.Actual].Text);
     //Buttons
     UMI.SelectionButtons[0].SetRef(
-        () => { return (Script[Script.Actual].ButtonText[0]) },
-        () => { return (Script[Script.Actual].ButtonAction[0]) },
+        Script[Script.Actual].ButtonText[0],
+        Script[Script.Actual].ButtonAction[0],
         "hidden",
-        () => { return (Script[Script.Actual].ButtonActive[0]) }
+        Script[Script.Actual].ButtonActive[0]
     );
-    UMI.SelectionButtons[1].SetRef(
-        () => { return (Script[Script.Actual].ButtonText[1]) },
-        () => { return (Script[Script.Actual].ButtonAction[1]) },
+    UMI.SelectionButtons[1].SetRef(Script[Script.Actual].ButtonText[1],
+        Script[Script.Actual].ButtonAction[1],
         "hidden",
-        () => { return (Script[Script.Actual].ButtonActive[1]) }
-    );
+        Script[Script.Actual].ButtonActive[1]);
     UMI.SelectionButtons[2].SetRef(
-        () => { return (Script[Script.Actual].ButtonText[2]) },
-        () => { return (Script[Script.Actual].ButtonAction[2]) },
+        Script[Script.Actual].ButtonText[2],
+        Script[Script.Actual].ButtonAction[2],
         "hidden",
-        () => { return (Script[Script.Actual].ButtonActive[2]) },
+        Script[Script.Actual].ButtonActive[2],
     );
     UMI.SelectionButtons[3].SetRef(
-        () => { return (Script[Script.Actual].ButtonText[3]) },
-        () => { return (Script[Script.Actual].ButtonAction[3]) },
+        Script[Script.Actual].ButtonText[3],
+        Script[Script.Actual].ButtonAction[3],
         "hidden",
-        () => { return (Script[Script.Actual].ButtonActive[3]) }
-    );
+        Script[Script.Actual].ButtonActive[3]);
     UMI.SelectionButtons[4].SetRef(
-        () => { return (Script[Script.Actual].ButtonText[4]) },
-        () => { return (Script[Script.Actual].ButtonAction[4]) },
+        Script[Script.Actual].ButtonText[4],
+        Script[Script.Actual].ButtonAction[4],
         "hidden",
-        () => { return (Script[Script.Actual].ButtonActive[4]) }
-    );
-    //RockPaperScissors
-    UMI.RPSEnemyScore.SetRef(() => {
-        return (RPS.enemyScore)
-    });
-    UMI.RPSPlayerScore.SetRef(() => {
-        return (RPS.playerScore)
-    });
-    UMI.RPSEnemyTurn.SetRef(() => {
-        return (RPS.enemyTurn)
-    });
-    UMI.RPSPlayerTurn.SetRef(() => {
-        return (RPS.playerTurn)
-    });
-    //PlayerStatistics
-    UMI.PlayerLevel.SetRef(() => {
-        return (Player.Level)
-    });
-    UMI.PlayerMoney.SetRef(() => {
-        return (Player.Money)
-    });
-    UMI.PlayerDamage.SetRef(() => {
-        return (Player.Damage)
-    });
-    UMI.HealthBar.SetRef(() => {
-        return (Player.Health)
-    });
-    UMI.HungerBar.SetRef(() => {
-        return (Player.Hunger)
-    });
-    UMI.StressBar.SetRef(() => {
-        return (Player.Stress)
-    });
-    UMI.PoisonBar.SetRef(() => {
-        return (Player.Poison)
-    });
-    UMI.PlayerMenu.SetRef(() => {
-        return (Player.Name)
-    });
-    UMI.PlayerStrength.SetRef(() => {
-        return (Player.Strength)
-    });
-    UMI.PlayerAgility.SetRef(() => {
-        return (Player.Agility)
-    });
-    UMI.PlayerIntellegence.SetRef(() => {
-        return (Player.Intellegence)
-    });
-    UMI.PlayerCharisma.SetRef(() => {
-        return (Player.Charisma)
-    });
-    UMI.PlayerLuck.SetRef(() => {
-        return (Player.Luck)
-    });
-    UMI.PlayerArmor.SetRef(() => {
-        return (Player.Armor)
-    });
-    UMI.PlayerScore.SetRef(() => {
-        return (Player.Score)
-    });
+        Script[Script.Actual].ButtonActive[4]);
+    //RockPaperScissors ✊✌️✋
+    UMI.RPSEnemyScore.SetRef(Script[Script.Actual].RPS.enemyScore);
+    UMI.RPSPlayerScore.SetRef(Script[Script.Actual].RPS.playerScore);
+    UMI.RPSEnemyTurn.SetRef(Script[Script.Actual].RPS.enemyTurn);
+    UMI.RPSPlayerTurn.SetRef(Script[Script.Actual].RPS.playerTurn);
+    UMI.ScissorsButton.SetAttribute("onclick", "Script[Script.Actual].RPS.PlayerTurn('✌️')");
+    UMI.PaperButton.SetAttribute("onclick", "Script[Script.Actual].RPS.PlayerTurn('✋')");
+    UMI.RockButton.SetAttribute("onclick", "Script[Script.Actual].RPS.PlayerTurn('✊')");
+    //PlayerStatistics 
+    UMI.PlayerLevel.SetRef(Player.Level);
+    UMI.PlayerMoney.SetRef(Player.Money);
+    UMI.PlayerDamage.SetRef(Player.Damage);
+    UMI.HealthBar.SetRef(Player.Health);
+    UMI.HungerBar.SetRef(Player.Hunger);
+    UMI.StressBar.SetRef(Player.Stress);
+    UMI.PoisonBar.SetRef(Player.Poison);
+    UMI.PlayerMenu.SetRef(Player.Name);
+    UMI.PlayerStrength.SetRef(Player.Strength);
+    UMI.PlayerAgility.SetRef(Player.Agility);
+    UMI.PlayerIntellegence.SetRef(Player.Intellegence);
+    UMI.PlayerCharisma.SetRef(Player.Charisma);
+    UMI.PlayerLuck.SetRef(Player.Luck);
+    UMI.PlayerArmor.SetRef(Player.Armor);
+    UMI.PlayerScore.SetRef(Player.Score);
     //PlayerBag
-    UMI.PlayerInventory[0].SetRef(() => {
-        return (Player.Bag.Items[0].Icon)
-    });
-    UMI.PlayerInventory[1].SetRef(() => {
-        return (Player.Bag.Items[1].Icon)
-    });
-    UMI.PlayerInventory[2].SetRef(() => {
-        return (Player.Bag.Items[2].Icon)
-    });
-    UMI.PlayerInventory[3].SetRef(() => {
-        return (Player.Bag.Items[3].Icon)
-    });
-    UMI.PlayerInventory[4].SetRef(() => {
-        return (Player.Bag.Items[4].Icon)
-    });
-    UMI.PlayerInventory[5].SetRef(() => {
-        return (Player.Bag.Items[5].Icon)
-    });
-    UMI.PlayerInventory[6].SetRef(() => {
-        return (Player.Bag.Items[6].Icon)
-    });
-    UMI.PlayerInventory[7].SetRef(() => {
-        return (Player.Bag.Items[7].Icon)
-    });
-    UMI.PlayerInventory[8].SetRef(() => {
-        return (Player.Bag.Items[8].Icon)
-    });
+    UMI.PlayerInventory[0].SetRef(Player.Bag.Items[0].Icon);
+    UMI.PlayerInventory[1].SetRef(Player.Bag.Items[1].Icon);
+    UMI.PlayerInventory[2].SetRef(Player.Bag.Items[2].Icon);
+    UMI.PlayerInventory[3].SetRef(Player.Bag.Items[3].Icon);
+    UMI.PlayerInventory[4].SetRef(Player.Bag.Items[4].Icon);
+    UMI.PlayerInventory[5].SetRef(Player.Bag.Items[5].Icon);
+    UMI.PlayerInventory[6].SetRef(Player.Bag.Items[6].Icon);
+    UMI.PlayerInventory[7].SetRef(Player.Bag.Items[7].Icon);
+    UMI.PlayerInventory[8].SetRef(Player.Bag.Items[8].Icon);
 }
 
 function InitRPS() {
@@ -278,18 +217,15 @@ function InitRPS() {
     UMI.RockButton = new Element("button", "RockButton");
     UMI.RockButton.Change("innerHTML", "✊");
     UMI.RockButton.SetAttribute("class", "invitem");
-    UMI.RockButton.SetAttribute("onclick", "RPS.PlayerTurn('✊')");
     UMI.ScissorsButton = new Element("button", "ScissorsButton");
     UMI.ScissorsButton.Change("innerHTML", "✌️");
     UMI.ScissorsButton.SetAttribute("class", "invitem");
-    UMI.ScissorsButton.SetAttribute("onclick", "RPS.PlayerTurn('✌️')");
+    
     UMI.PaperButton = new Element("button", "PaperButton");
     UMI.PaperButton.Change("innerHTML", "✋");
     UMI.PaperButton.SetAttribute("class", "invitem");
-    UMI.PaperButton.SetAttribute("onclick", "RPS.PlayerTurn('✋')");
     UMI.RPSBlock.Close();
     UMI.RPSBlock.HideOrNot(true);
-    //🪨✂️📄 || ✊✌️✋
 }
 
 function CreateInterface() {
@@ -297,15 +233,15 @@ function CreateInterface() {
     InitRPS();
     InitPlayerStats();
     InitInventory();
-    SetReferences();
+    setInterval(() => SetReferences(), 100);
     setInterval(() => Player.LiveLife(), 2000);
     UMI.Version = new Element("a", "Version");
     UMI.Version.Change("innerHTML", "version: 🎲0.02rps");
 }
 
 function Main() {
-    CreateInterface();
     Script.Set("Q01");
+    CreateInterface();
 
 }
 

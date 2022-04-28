@@ -72,15 +72,14 @@ Entities["🍺"] = new Entity({
 
 var Script = [];
 Script.Actual;
-Script.Set = function (a){
+Script.Set = function (a) {
     Script[a].Set();
-    Script.Actual= a;
+    Script.Actual = a;
 }
 
 Script["Q01"] = new Dialog({
     name: "📖 Рассказчик",
     text: "Добро пожаловать! О чём ты хочешь знать?",
-    buttonactive01: true,
     buttontext01: "Как всё работает?",
     buttontext02: "Ничего не хочу знать!",
     buttonaction01: "Script.Set('Q02')",
@@ -163,10 +162,10 @@ Script["TavernFood"] = new Dialog({
 Script["TavernGame"] = new Dialog({
     name: "🧖🏻‍♂️Местный доходяга",
     text: "Если выйграешь, то отдам тебе 1 золотую, а, думаю ты и так согласен",
-    game: new RockPaperScissors(
+    rps: new RockPaperScissors(
         "Random",
-        () => { Script.Set('Tavern'), Player.Money++, Player.Stress += 15 },
-        () => { Script.Set('Tavern'), Player.Money -= 1, Player.Stress += 25 })
+        () => { Script[Script.Actual].RPS.Repeat(), Script.Set('Tavern'), Player.Money++, Player.Stress += 15 },
+        () => { Script[Script.Actual].RPS.Repeat(), Script.Set('Tavern'), Player.Money -= 1, Player.Stress += 25 })
 });
 
 Script["MarketPlace"] = new Dialog({

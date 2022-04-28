@@ -185,7 +185,7 @@ class Dialog {
         this.Text = values.text || "";
         this.Active = values.active;
         this.Alternative = values.alternative || "";
-        this.Game = values.game;
+        this.RPS = values.rps || new RockPaperScissors("","","",true);
         this.ButtonText = [];
         this.ButtonText.push(values.buttontext01 || "");
         this.ButtonText.push(values.buttontext02 || "");
@@ -220,17 +220,7 @@ class Dialog {
         }
     }
     MainActivity() {
-        this.SetGame();
         this.ActivateSounds();
-    }
-    SetGame() {
-        if (this.Game != undefined) {
-            RPS = new RockPaperScissors(this.Game.difficulty, this.Game.winaction, this.Game.loseaction);
-            UMI.RPSBlock.HideOrNot(false);
-        }
-        else {
-            UMI.RPSBlock.HideOrNot(true);
-        }
     }
     ActivateSounds() {
         if (this.Ambient != "") {
@@ -244,7 +234,7 @@ class Dialog {
 
 //RockPaperScissors ✊✌️✋
 class RockPaperScissors {
-    constructor(d, w, l) {
+    constructor(d, w, l, empty) {
         this.Dict = ["✊", "✌️", "✋"];
         this.difficulty = d;
         this.enemyScore = 0;
@@ -254,8 +244,7 @@ class RockPaperScissors {
         this.playerTurn = "";
         this.winaction = w;
         this.loseaction = l;
-        this.completed = false;
-        this.won = false;
+        this.completed = empty || false;
     }
     PlayerTurn(t) {
         this.WinLoseChecker();
@@ -303,18 +292,24 @@ class RockPaperScissors {
         let d = this.playerScore - this.enemyScore;
         if (d >= 3) {
             this.completed = true;
-            this.won = true;
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
             this.winaction();
         }
         if (d <= -3) {
             this.completed = true;
-            this.won = false;
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
             this.loseaction();
         }
+    }
+    Repeat(){
+        this.completed=false;
+        this.enemyScore = 0;
+        this.playerScore = 0;
+        this.playerTurn = "";
+        this.enemyTurn = "";
+        this.enemyTurnsHistory = [];
     }
 }
 

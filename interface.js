@@ -58,31 +58,31 @@ class Element {
         this.aref = a;
         this.aa = aa;
         this.aaref = aar;
-        setInterval(() => this.ApplyRef(), 100);
+        this.ApplyRef();
     }
     SetBasicRef() {
-        if (this.NeedRef == true) {
-            this.Change("innerHTML", this.ref());
+        if (this.NeedRef == true || this.ref != undefined) {
+            this.Change("innerHTML", this.ref);
             this.SetOnClickRef();
-
         }
     }
     SetOnClickRef() {
         if (this.aref != undefined) {
-            this.SetAttribute("onclick", "" + this.aref());
+            this.SetAttribute("onclick", "" + this.aref);
         }
     }
     SetAdditionalAttribute() {
-                try {
-                    this.Change(this.aa, this.aaref());
-                    if (this.ref() + "" == "") {
-                        this.HideOrNot(true);}
-                }
-                catch (e) { }
+        try {
+            this.Change(this.aa, this.aaref);
+            if (this.ref + "" == "") {
+                this.HideOrNot(true);
+            }
+        }
+        catch (e) { }
     }
     HiddenChecker() {
         if (this.HideOnEmpty == true) {
-            if (this.ref() + "" == "") {
+            if (this.ref + "" == "") {
                 this.HideOrNot(true);
             } else {
                 this.HideOrNot(false);
@@ -90,9 +90,9 @@ class Element {
         }
     }
     ApplyRef() {
-        this.SetBasicRef();      
-        this.HiddenChecker();  
-        this.SetAdditionalAttribute();        
+        this.SetBasicRef();
+        this.HiddenChecker();
+        this.SetAdditionalAttribute();
     }
 }
 
