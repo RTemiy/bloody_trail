@@ -27,15 +27,13 @@ class Element {
         document.write("</" + this.type + ">");
     }
     Change(att, value) {
-        let a = "document.getElementById(this.id)";
-        let b = eval(a + "." + att + "=" + "value");
+        document.getElementById(this.id)[att]=value;
     }
     GetValue() {
         return (document.getElementById(this.id).innerHTML);
     }
     SetAttribute(att, value) {
-        let a = "document.getElementById(this.id)";
-        let b = eval(a + ".setAttribute(" + "att" + "," + 'value)');
+        document.getElementById(this.id).setAttribute(att,value);
     }
     HideOrNot(w) {
         if (w == true) {

@@ -44,7 +44,6 @@ function InitDialog() {
 
 function InitPlayerStats() {
     UMI.PlayerBlock = new Element("div", "PlayerBlock", false);
-    new Element("hr");
     UMI.PlayerBlock.SetAttribute("class", "playerblock");
     UMI.PlayerMenu = new Element('p', 'PlayerMenu');
     UMI.PlayerMenu.Change("innerHTML", "👤 Игрок");
@@ -112,7 +111,6 @@ function InitPlayerStats() {
 
 function InitInventory() {
     UMI.InventoryBlock = new Element("div", "InventoryBlock", false);
-    new Element("hr");
     UMI.InventoryBlock.SetAttribute("class", "invblock");
     UMI.PlayerMenuInventory = new Element("p", "PlayerMenuInventory");
     UMI.PlayerMenuInventory.Change("innerHTML", "🎒 Рюкзак");
