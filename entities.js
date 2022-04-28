@@ -17,7 +17,7 @@ class Entity {
         this.Hunger = values.hunger || 0;
         this.Strength = values.strength || 0;
         this.Agility = values.agility || 0;
-        this.Intellegence = values.intellegence || 0;
+        this.Intelligence = values.intelligence || 0;
         this.Luck = values.luck || 0;
         this.Charisma = values.charisma || 0;
         this.Completed = values.completed || false;
@@ -327,13 +327,13 @@ class SkillTest {
         if (res >= this.difficulty) {
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
-            alert("Удача!");
+            alert("Удача! " + "Требуется: " + this.difficulty + " Результат: " + res);
             this.winaction();
         }
         else {
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
-            alert("Провал!");
+            alert("Провал! " + "Требуется: " + this.difficulty + " Результат: " + res);
             this.loseaction();
         }
     }

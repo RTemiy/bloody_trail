@@ -19,7 +19,7 @@ var Player = new Character({
     hunger: 100,
     strength: 0,
     agility: 0,
-    intellegence: 0,
+    intelligence: 0,
     charisma: 0,
     luck: 0,
     inventory: new Inventory(9),
@@ -88,9 +88,9 @@ function InitPlayerStats() {
     UMI.PlayerAgilityIcon = new Element("a", "PAgility");
     UMI.PlayerAgilityIcon.Change("innerHTML", "⠀| 🦶 ");
     UMI.PlayerAgility = new Element("a", "PlayerAgility");
-    UMI.PlayerIntellegenceIcon = new Element("a", "PInt");
-    UMI.PlayerIntellegenceIcon.Change("innerHTML", "⠀| 🧠 ");
-    UMI.PlayerIntellegence = new Element("a", "PlayerIntellegence");
+    UMI.PlayerIntelligenceIcon = new Element("a", "PInt");
+    UMI.PlayerIntelligenceIcon.Change("innerHTML", "⠀| 🧠 ");
+    UMI.PlayerIntelligence = new Element("a", "PlayerIntelligence");
     UMI.PlayerCharismaIcon = new Element("a", "PChar");
     UMI.PlayerCharismaIcon.Change("innerHTML", "⠀| 🤝 ");
     UMI.PlayerCharisma = new Element("a", "PlayerCharisma");
@@ -177,7 +177,7 @@ function SetReferences() {
     UMI.PlayerMenu.SetRef(Player.Name);
     UMI.PlayerStrength.SetRef(Player.Strength);
     UMI.PlayerAgility.SetRef(Player.Agility);
-    UMI.PlayerIntellegence.SetRef(Player.Intellegence);
+    UMI.PlayerIntelligence.SetRef(Player.Intelligence);
     UMI.PlayerCharisma.SetRef(Player.Charisma);
     UMI.PlayerLuck.SetRef(Player.Luck);
     UMI.PlayerArmor.SetRef(Player.Armor);

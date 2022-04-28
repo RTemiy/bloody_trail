@@ -111,7 +111,7 @@ Script["Q04"] = new Dialog({
     buttontext05: "+5 золотых монет",
     buttonaction01: "Script.Set('MainStreet');Player.Strength+=1;",
     buttonaction02: "Script.Set('MainStreet');Player.Agility+=1;",
-    buttonaction03: "Script.Set('MainStreet');Player.Intellegence+=1;",
+    buttonaction03: "Script.Set('MainStreet');Player.Intelligence+=1;",
     buttonaction04: "Script.Set('MainStreet');Player.Luck+=1;",
     buttonaction05: "Script.Set('MainStreet');Player.Money+=5;",
 });
@@ -177,9 +177,9 @@ Script["TavernCat"]= new Dialog({
     buttontext04: "Защекотать",
     buttontext05: "Уйти",
     buttonaction01: "new SkillTest('Easy',Player.Luck,() => {Script.Set('TavernCatDialog')},() => {Script.Set('Tavern');Player.Stress+=15;Script['Tavern'].ButtonActive[1]=true})",
-    buttonaction02: "",
-    buttonaction03: "",
-    buttonaction04: "",
+    buttonaction02: "new SkillTest('Easy',Player.Intelligence,() => {Script.Set('TavernCatDialog')},() => {Script.Set('Tavern');Player.Stress+=15;Script['Tavern'].ButtonActive[1]=true})",
+    buttonaction03: "new SkillTest('Easy',Player.Strength,() => {Script.Set('TavernCatDialog')},() => {Script.Set('Tavern');Player.Stress+=15;Script['Tavern'].ButtonActive[1]=true})",
+    buttonaction04: "new SkillTest('Easy',Player.Agility,() => {Script.Set('TavernCatDialog')},() => {Script.Set('Tavern');Player.Stress+=15;Script['Tavern'].ButtonActive[1]=true})",
     buttonaction05: "Script.Set('Tavern');",
 });
 
