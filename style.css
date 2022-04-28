@@ -2,11 +2,11 @@
   box-sizing: border-box;
 }
 body {
-  font: "URW Bookman L", serif;
+  font: 1.2em "Times New Roman", serif;
   width: 400px;
 }
 button {
-  font: 15px "URW Palladio L", serif;
+  font: bold 13px "URW Palladio L", serif;
   border-radius: 5px;
   border-width: 2px;
   margin-left: 5px;
