@@ -39,13 +39,12 @@ function InitDialog() {
         UMI.SelectionButtons.push(new Element("button", "SelectionButton" + u));
     }
     InitRPS();
-    UMI.DialogBlock.Close();
-    new Element("hr");    
+    UMI.DialogBlock.Close();  
 }
 
 function InitPlayerStats() {
-    new Element("hr");
     UMI.PlayerBlock = new Element("div", "PlayerBlock", false);
+    new Element("hr");
     UMI.PlayerBlock.SetAttribute("class", "playerblock");
     UMI.PlayerMenu = new Element('p', 'PlayerMenu');
     UMI.PlayerMenu.Change("innerHTML", "👤 Игрок");
@@ -113,6 +112,7 @@ function InitPlayerStats() {
 
 function InitInventory() {
     UMI.InventoryBlock = new Element("div", "InventoryBlock", false);
+    new Element("hr");
     UMI.InventoryBlock.SetAttribute("class", "invblock");
     UMI.PlayerMenuInventory = new Element("p", "PlayerMenuInventory");
     UMI.PlayerMenuInventory.Change("innerHTML", "🎒 Рюкзак");

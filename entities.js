@@ -185,7 +185,7 @@ class Dialog {
         this.Text = values.text || "";
         this.Active = values.active;
         this.Alternative = values.alternative || "";
-        this.RPS = values.rps || new RockPaperScissors("","","",true);
+        this.RPS = values.rps || new RockPaperScissors("", "", "", true);
         this.ButtonText = [];
         this.ButtonText.push(values.buttontext01 || "");
         this.ButtonText.push(values.buttontext02 || "");
@@ -303,8 +303,8 @@ class RockPaperScissors {
             this.loseaction();
         }
     }
-    Repeat(){
-        this.completed=false;
+    Repeat() {
+        this.completed = false;
         this.enemyScore = 0;
         this.playerScore = 0;
         this.playerTurn = "";
@@ -314,19 +314,26 @@ class RockPaperScissors {
 }
 
 class SkillTest {
-    constructor(d, w, l) {
+    constructor(d, c, w, l) {
         this.difficulty = d;
         this.winaction = w;
         this.loseaction = l;
         this.dice = 20;
+        this.Check(c);
     }
     Check(CharacterChar) {
         this.SwitchDifficulty();
         var res = Math.floor(Math.random() * this.dice) + CharacterChar;
         if (res >= this.difficulty) {
+            let win = new SoundEntity("Sounds/Win.mp3");
+            win.Play();
+            alert("Удача!");
             this.winaction();
         }
         else {
+            let lose = new SoundEntity("Sounds/Lose.mp3");
+            lose.Play();
+            alert("Провал!");
             this.loseaction();
         }
     }

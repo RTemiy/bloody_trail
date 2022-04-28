@@ -137,7 +137,7 @@ Script["Tavern"] = new Dialog({
     buttontext04: "Попытать удачу в 'камень, ножницы, бумага'",
     buttontext05: "Уйти",
     buttonaction01: "Script.Set('TavernFood')",
-    buttonaction02: "",
+    buttonaction02: "Script.Set('TavernCat');",
     buttonaction03: "",
     buttonaction04: "if(Player.Money>=1){Script.Set('TavernGame')}else{alert('Не хватает денег!');}",
     buttonaction05: "Script.Set('MainStreet')",
@@ -166,6 +166,36 @@ Script["TavernGame"] = new Dialog({
         "Random",
         () => { Script[Script.Actual].RPS.Repeat(), Script.Set('Tavern'), Player.Money++, Player.Stress += 15 },
         () => { Script[Script.Actual].RPS.Repeat(), Script.Set('Tavern'), Player.Money -= 1, Player.Stress += 25 })
+});
+
+Script["TavernCat"]= new Dialog({
+    name: "🐈‍⬛‍Чёрный кот",
+    text: "Кот наблюдает и не хочет разговаривать. Можно попытаться заставить его обратить на вас внимание",
+    buttontext01: "Попытать удачу",
+    buttontext02: "Испытать интеллект",
+    buttontext03: "Заставить силой",
+    buttontext04: "Защекотать",
+    buttontext05: "Уйти",
+    buttonaction01: "new SkillTest('Easy',Player.Luck,() => {Script.Set('TavernCatDialog')},() => {Script.Set('Tavern');Player.Stress+=15;Script['Tavern'].ButtonActive[1]=true})",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "Script.Set('Tavern');",
+});
+
+Script["TavernCatDialog"]= new Dialog({
+    name: "🐈‍⬛Чёрный кот",
+    text: "",
+    buttontext01: "",
+    buttontext02: "",
+    buttontext03: "",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "Script.Set('Tavern');",
 });
 
 Script["MarketPlace"] = new Dialog({
