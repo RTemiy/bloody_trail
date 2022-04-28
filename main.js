@@ -32,15 +32,19 @@ function InitDialog() {
     UMI.DialogTitle = new Element("p", "DialogTitle");
     new Element("hr");
     UMI.Dialog = new Element("p", "Dialog");
+    UMI.Dialog.SetAttribute("class", "dialog");
     new Element("hr");
     UMI.SelectionButtons = [];
     for (var u = 0; u < 5; u++) {
         UMI.SelectionButtons.push(new Element("button", "SelectionButton" + u));
     }
+    InitRPS();
     UMI.DialogBlock.Close();
+    new Element("hr");    
 }
 
 function InitPlayerStats() {
+    new Element("hr");
     UMI.PlayerBlock = new Element("div", "PlayerBlock", false);
     UMI.PlayerBlock.SetAttribute("class", "playerblock");
     UMI.PlayerMenu = new Element('p', 'PlayerMenu');
@@ -230,7 +234,6 @@ function InitRPS() {
 
 function CreateInterface() {
     InitDialog();
-    InitRPS();
     InitPlayerStats();
     InitInventory();
     setInterval(() => SetReferences(), 100);

@@ -1,64 +1,45 @@
-body {
-    background: black;
-    width: 400px;
-    color: white;
+* {
+  box-sizing: border-box;
 }
-button : hover {
-    color: white;
+body {
+  font-size: 14px;
+  width: 400px
 }
 button {
-    border-radius: 5px;
-    margin-left: 20px;
-    border: 2px groove grey;
-    height: 40px;
-    transition: 0.5s linear;
-    color: white;
-    background: black;
-}
-active {
-    color: green;
-    transition: 0.5s linear;
-}
-.active :hover {
-    background: white;
+  border-radius: 5px;
+  margin-left: 5px;
+  border: ;
+  height: 30px;
+  background: rgb(214, 214, 214);
+  opacity: 1;
+  overflow: hidden;
 }
 div {
-    border-radius: 10px;
-    border: 2px groove grey;
-    margin-top: 15px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 15px;
-    width: 370;
-    overflow: auto;
-}
-invbutton {
-    height: 60px;
-    width: 60px;
-    margin: 0px;
-    border: 0px;
-    font-size: 200%;
-}
-.invwearable {
-    height: 60px;
-    width: 60px;
-    margin: 0px;
-    font-size: 200%;
-    border-color: green;
+  width: 400px;
+  background: rgba(196,196,196,1);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
 }
 .invitem {
-    height: 60px;
-    width: 60px;
-    margin: 0px;
-    font-size: 200%;
-    border-color: white;
+  height: 60px;
+  width: 60px;
+  margin: 0px;
+  font-size: 200%;
+  border-color: white;
 }
 .invblock {
-    width: 184px;
-    height: 180px;
-    box-sizing: border-box;
+  width: 190px;
+  height: 180px;
+  box-sizing: border-box;
 }
 .dialogblock {
-    height: 350;
-    box-sizing: border-box;
+  height: 300px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.dialog {
+  height: 100px;
+  overflow: auto;
+  box-sizing: border-box;
 }
