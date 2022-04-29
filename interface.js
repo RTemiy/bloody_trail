@@ -27,13 +27,13 @@ class Element {
         document.write("</" + this.type + ">");
     }
     Change(att, value) {
-        document.getElementById(this.id)[att]=value;
+        document.getElementById(this.id)[att] = value;
     }
     GetValue() {
         return (document.getElementById(this.id).innerHTML);
     }
     SetAttribute(att, value) {
-        document.getElementById(this.id).setAttribute(att,value);
+        document.getElementById(this.id).setAttribute(att, value);
     }
     HideOrNot(w) {
         if (w == true) {
@@ -91,6 +91,36 @@ class Element {
         this.SetBasicRef();
         this.HiddenChecker();
         this.SetAdditionalAttribute();
+    }
+}
+
+//MESSAGE
+class Message {
+    constructor() {        
+        this.hidden = true;
+    }
+    New(values){
+        this.hidden = false;
+        var values = values;
+        this.title = "✉️ Сообщение" || values.title;
+        this.text = values.text;
+        this.action = values.action;
+        this.deny = values.deny;
+        this.buttonok = "✔️" || values.buttonoktext;
+        this.buttondeny = "❌" || values.buttondenytext;      
+    }
+    OK(){
+        this.hidden=true;
+        this.res=true;
+        this.action();
+    }
+    Deny(){
+        this.hidden=true;
+        this.res=false;
+        this.deny();
+    }
+    Result(){
+        return(this.res);
     }
 }
 

@@ -340,13 +340,13 @@ class SkillTest {
         if (res >= this.difficulty) {
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
-            alert("Удача! " + "Требуется: " + this.difficulty + " Результат: " + res);
+            Info.New({text: "Удача! " + "Требуется: " + this.difficulty + " Результат: " + res,});
             this.winaction();
         }
         else {
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
-            alert("Провал! " + "Требуется: " + this.difficulty + " Результат: " + res);
+            Info.New({text: "Провал! " + "Требуется: " + this.difficulty + " Результат: " + res,});
             this.loseaction();
         }
     }

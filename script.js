@@ -55,7 +55,7 @@ Entities["🍺"] = new Entity({
 //STORYLINE
 
 /*
-= new Dialog({
+Script[""]= new Dialog({
     name: "",
     text: "",
     alternative: ,
@@ -142,7 +142,7 @@ Script["Tavern"] = new Dialog({
     buttonaction01: "Script.Set('TavernFood')",
     buttonaction02: "Script.Set('TavernCat');",
     buttonaction03: "",
-    buttonaction04: "if(Player.Money>=1){Script.Set('TavernGame')}else{alert('Не хватает денег!');}",
+    buttonaction04: "if(Player.Money>=1){Script.Set('TavernGame')}else{Info.New({text:'Не хватает денег!'});}",
     buttonaction05: "Script.Set('MainStreet')",
     ambient: new SoundEntity("https://rtemiy.github.io/bloody_trail/Sounds/Tavern.mp3"),
 });
@@ -207,13 +207,58 @@ Script["MarketPlace"] = new Dialog({
     buttontext01: "Подойти к торговке",
     buttontext02: "Поговорить с кузнецом",
     buttontext03: "",
+    buttontext04: "Пройти к выходу в лес",
+    buttontext05: "Уйти",
+    buttonaction01: "Script.Set('MarketWoman')",
+    buttonaction02: "Script.Set('MarketSmith')",
+    buttonaction03: "",
+    buttonaction04: "Script.Set('ExitToForest')",
+    buttonaction05: "Script.Set('MainStreet')",
+});
+
+Script["MarketWoman"]= new Dialog({
+    name: "👩🏾‍🌾 Торговка",
+    text: "",
+    buttontext01: "",
+    buttontext02: "",
+    buttontext03: "",
     buttontext04: "",
     buttontext05: "Уйти",
     buttonaction01: "",
     buttonaction02: "",
     buttonaction03: "",
     buttonaction04: "",
-    buttonaction05: "Script.Set('MainStreet')",
+    buttonaction05: "Script.Set('MarketPlace')",
+});
+
+Script["MarketSmith"]= new Dialog({
+    name: "👨🏻‍🔧 Кузнец",
+    text: "",
+    buttontext01: "",
+    buttontext02: "",
+    buttontext03: "",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "Script.Set('MarketPlace')",
+});
+
+Script["ExitToForest"]= new Dialog({
+    name: "📖 Рассказчик",
+    text: "Ворота ведущие в тёмный лес охраняются двумя стражниками. Справа родной дом, слева колодец, где все набирают воду",
+    buttontext01: "",
+    buttontext02: "",
+    buttontext03: "",
+    buttontext04: "",
+    buttontext05: "Уйти",
+    buttonaction01: "",
+    buttonaction02: "",
+    buttonaction03: "",
+    buttonaction04: "",
+    buttonaction05: "Script.Set('MarketPlace')",
 });
 
 Script["WitcherStore"] = new Dialog({
@@ -234,9 +279,6 @@ Script["WitcherStore"] = new Dialog({
 Script["Witcher01"] = new Dialog({
     name: "🦹🏻‍♂️ Ведьмак",
     text: "Я сейчас очень занят, поэтому попрошу меня не отвлекать, хотя если ты ищешь работу, есть у меня парочка заданий",
-    alternative: function () {
-        Script.Set("WitcherQuest01")
-    },
     buttontext01: "Поговорить о задании",
     buttontext02: "",
     buttontext03: "",

@@ -6,6 +6,7 @@ script.js
 */
 //VARIABLES
 var UMI = {};
+var Info = new Message({title:''});
 var Player = new Character({
     name: "🌡 Показатели персонажа:",
     level: 1,
@@ -126,7 +127,21 @@ function InitInventory() {
     }
     UMI.InventoryBlock.Close();
 }
-//()=>{return()}
+
+function InitMessage(){
+    UMI.MessageBlock = new Element("div", "MessageBlock", false);
+    UMI.MessageBlock.SetAttribute("class", "messageblock");
+    UMI.MessageMenu = new Element("p", "MessageMenu");
+    UMI.MessageMenu.Change("innerHTML", "✉️ Сообщение");
+    UMI.MessageMenu.SetAttribute("class", "messagemenu");
+    new Element("hr");
+    UMI.MessageText = new Element("p","MessageText");
+    UMI.MessageText.SetAttribute("class", "messagetext");
+    UMI.MesBut01 = new Element("button", "MesBut01");
+    UMI.MesBut02 = new Element("button", "MesBut02");
+    UMI.MessageBlock.Close();    
+}
+
 function SetReferences() {
     //PlayerAction
     UMI.DialogBlock.HideOrNot(Player.Completed);
@@ -195,6 +210,14 @@ function SetReferences() {
     UMI.PlayerInventory[6].SetRef(Player.Bag.Items[6].Icon);
     UMI.PlayerInventory[7].SetRef(Player.Bag.Items[7].Icon);
     UMI.PlayerInventory[8].SetRef(Player.Bag.Items[8].Icon);
+    //Message
+    UMI.MessageBlock.HideOrNot(Info.hidden);
+    UMI.MessageMenu.SetRef(Info.title);
+    UMI.MessageText.SetRef(Info.text);
+    UMI.MesBut01.SetRef(Info.buttonok);
+    UMI.MesBut02.SetRef(Info.buttondeny);
+    UMI.MesBut01.SetAttribute('onclick','Info.OK()');    
+    UMI.MesBut02.SetAttribute('onclick','Info.Deny()');
 }
 
 function InitRPS() {
@@ -240,6 +263,7 @@ function CreateInterface() {
     InitDialog();
     InitPlayerStats();
     InitInventory();
+    InitMessage();
     setInterval(() => SetReferences(), 100);
     
     UMI.Version = new Element("a", "Version");
