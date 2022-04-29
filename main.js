@@ -29,9 +29,9 @@ var Player = new Character({
 //PROGRAM BODY
 function InitDialog() {
     UMI.DialogBlock = new Element("div", "DialogBlock", false);
-    InitRPS();
     UMI.DialogBlock.SetAttribute("class", "dialogblock");
     UMI.DialogTitle = new Element("p", "DialogTitle");
+    UMI.DialogTitle.SetAttribute("class", "dialogtitle");
     new Element("hr");
     UMI.Dialog = new Element("p", "Dialog");
     UMI.Dialog.SetAttribute("class", "dialog");
@@ -48,6 +48,7 @@ function InitPlayerStats() {
     UMI.PlayerBlock.SetAttribute("class", "playerblock");
     UMI.PlayerMenu = new Element('p', 'PlayerMenu');
     UMI.PlayerMenu.Change("innerHTML", "👤 Игрок");
+    UMI.PlayerMenu.SetAttribute("class", "playermenu");
     new Element("hr");
     UMI.PlayerLevelIcon = new Element("a", "PLI");
     UMI.PlayerLevelIcon.Change("innerHTML", "🏆 ");
@@ -115,6 +116,7 @@ function InitInventory() {
     UMI.InventoryBlock.SetAttribute("class", "invblock");
     UMI.PlayerMenuInventory = new Element("p", "PlayerMenuInventory");
     UMI.PlayerMenuInventory.Change("innerHTML", "🎒 Рюкзак");
+    UMI.PlayerMenuInventory.SetAttribute("class", "playermenuinventory");
     new Element("hr");
     UMI.PlayerInventory = [];
     for (x = 0; x < Player.Bag.MaxCells; x++) {
@@ -234,6 +236,7 @@ function InitRPS() {
 }
 
 function CreateInterface() {
+    InitRPS();
     InitDialog();
     InitPlayerStats();
     InitInventory();
