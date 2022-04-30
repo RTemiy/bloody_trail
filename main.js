@@ -123,8 +123,9 @@ function InitInventory() {
     for (x = 0; x < Player.Bag.MaxCells; x++) {
         UMI.PlayerInventory.push(new Element('button', 'inv' + x));
         UMI.PlayerInventory[x].SetAttribute("class", "invitem");
-        UMI.PlayerInventory[x].SetAttribute("onclick", "Player.Use(Player.Bag.Items[" + x + "]);");
+        UMI.PlayerInventory[x].SetAttribute("onclick", "Info.New({ title: Player.Bag.Items[" + x + "].Name, text: Player.Bag.Items[" + x + "].Title, action: function(){Player.Use(Player.Bag.Items[" + x + "])}})");
     }
+    
     UMI.InventoryBlock.Close();
 }
 
@@ -215,7 +216,9 @@ function SetReferences() {
     UMI.MessageMenu.SetRef(Info.title);
     UMI.MessageText.SetRef(Info.text);
     UMI.MesBut01.SetRef(Info.buttonok);
+    UMI.MesBut01.HideOrNot(Info.buttonokhidden);
     UMI.MesBut02.SetRef(Info.buttondeny);
+    UMI.MesBut02.HideOrNot(Info.buttondenyhidden);
     UMI.MesBut01.SetAttribute('onclick','Info.OK()');    
     UMI.MesBut02.SetAttribute('onclick','Info.Deny()');
 }

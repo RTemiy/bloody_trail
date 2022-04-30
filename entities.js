@@ -33,15 +33,16 @@ class Character extends Entity {
         this.MaxHealth = values.health;
         this.Bag = values.inventory || null;
         this.Score = 0;
+        this.me = this;
     }
     isAlive() {
         if (this.Health <= 0 ||
             this.Energy <= 0) {
             this.Completed = true;
         }
-        else{
+        else {
             this.Completed = false;
-        }        
+        }
     }
     MinSolver() {
         //Minimal values
@@ -70,15 +71,14 @@ class Character extends Entity {
         }
         if (this.Poison >= 100) {
             this.Poison = 100;
-            this.Health-=4
+            this.Health -= 4;
         }
         if (this.Stress >= 100) {
             this.Stress = 100;
             this.Health -= 2;
         }
     }
-    Use(entity) {
-        if (confirm(entity.Name + ". " + entity.Title) == true) {
+    Use(entity) {      
             if (entity.Type == "Wearable") {
                 this.Unwear(entity);
             } else {
@@ -88,19 +88,18 @@ class Character extends Entity {
                         use.Play();
                         break;
                 }
-                this.Level += entity.Level
-                this.Health += entity.Health;
-                this.Armor += entity.Armor;
-                this.Damage += entity.Damage;
-                this.Stress += entity.Stress;
-                this.Poison += entity.Poison;
-                this.Hunger += entity.Hunger;
-                this.Energy += entity.Energy;
+                this.me.Level += entity.Level
+                this.me.Health += entity.Health;
+                this.me.Armor += entity.Armor;
+                this.me.Damage += entity.Damage;
+                this.me.Stress += entity.Stress;
+                this.me.Poison += entity.Poison;
+                this.me.Hunger += entity.Hunger;
+                this.me.Energy += entity.Energy;
                 entity.Icon = "";
                 entity.Completed = true;
             }
-        }
-    }
+        }            
     Unwear(entity) {
         this.Level -= entity.Level
         this.Health -= entity.Health;
@@ -128,10 +127,10 @@ class Character extends Entity {
         this.Energy -= 2;
         this.Hunger -= 1;
         this.MinSolver();
-        this.isAlive();          
+        this.isAlive();
     }
-    Start(){
-        setInterval(() => this.LiveLife(),2000);      
+    Start() {
+        setInterval(() => this.LiveLife(), 2000);
     }
 }
 
@@ -340,13 +339,13 @@ class SkillTest {
         if (res >= this.difficulty) {
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
-            Info.New({text: "Удача! " + "Требуется: " + this.difficulty + " Результат: " + res,});
+            Info.New({ text: "Удача! " + "Требуется: " + this.difficulty + " Результат: " + res, });
             this.winaction();
         }
         else {
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
-            Info.New({text: "Провал! " + "Требуется: " + this.difficulty + " Результат: " + res,});
+            Info.New({ text: "Провал! " + "Требуется: " + this.difficulty + " Результат: " + res, });
             this.loseaction();
         }
     }

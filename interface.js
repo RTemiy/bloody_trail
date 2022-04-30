@@ -101,26 +101,24 @@ class Message {
     }
     New(values){
         this.hidden = false;
-        var values = values;
-        this.title = "✉️ Сообщение" || values.title;
+        this.buttonokhidden = false;
+        this.buttondenyhidden = false;
+        var values = values;        
+        this.title = values.title || "✉️ Сообщение";
         this.text = values.text;
         this.action = values.action;
         this.deny = values.deny;
-        this.buttonok = "✔️" || values.buttonoktext;
-        this.buttondeny = "❌" || values.buttondenytext;      
+        this.buttonok = "✔️" || values.buttonoktext;        
+        this.buttondeny = "❌" || values.buttondenytext; 
+        if(this.deny==undefined && this.action==undefined){this.buttondenyhidden = true; this.action=function(){return("nothing")}}    
     }
     OK(){
         this.hidden=true;
-        this.res=true;
         this.action();
     }
     Deny(){
         this.hidden=true;
-        this.res=false;
         this.deny();
-    }
-    Result(){
-        return(this.res);
     }
 }
 
