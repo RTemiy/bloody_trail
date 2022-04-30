@@ -28,6 +28,26 @@ var Player = new Character({
 });
 
 //PROGRAM BODY
+var b;
+function InitLoader(){
+
+    var max = 58;    
+    if(b == undefined){
+        b=true;
+        UMI.Loader = new Element("progress","loader");
+        UMI.Loader.SetAttribute("max", max);
+    }   
+    var v = 0;
+    v=Object.keys(UMI).length;    
+    UMI.Loader.SetAttribute("value", v);
+    
+    if(v!=max){
+    setTimeout(()=>{InitLoader();},100);
+    }
+    else{
+        UMI.Loader.HideOrNot(true);
+    }
+}
 function InitDialog() {
     UMI.DialogBlock = new Element("div", "DialogBlock", false);
     UMI.DialogBlock.SetAttribute("class", "dialogblock");
@@ -54,7 +74,6 @@ function InitPlayerStats() {
     UMI.PlayerLevelIcon = new Element("a", "PLI");
     UMI.PlayerLevelIcon.Change("innerHTML", "🏆 ");
     UMI.PlayerLevel = new Element('a', 'PLevel');
-    UMI.PlayerLevel.SetAttribute("class", "healthbar");
     UMI.PlayerMoneyIcon = new Element("a", "PMI");
     UMI.PlayerMoneyIcon.Change("innerHTML", "⠀| 💰 ");
     UMI.PlayerMoney = new Element('a', 'PMoney');
@@ -63,25 +82,26 @@ function InitPlayerStats() {
     UMI.PlayerDamage = new Element('a', 'PDamage');
     new Element("hr");
     UMI.PlayerHealth = new Element('a', 'PHealth');
-    UMI.PlayerHealth.SetAttribute("class", "healthbar");
     UMI.PlayerHealth.Change("innerHTML", " ❤️ ");
-    UMI.HealthBar = new Element("a", "HealthBar");
+    UMI.HealthBar = new Element("progress", "HealthBar");
     UMI.HealthBar.SetAttribute("class", "healthbar");
+    UMI.HealthBar.SetAttribute("max", 100);
     UMI.PlayerHunger = new Element('a', 'PHunger');
     UMI.PlayerHunger.Change('innerHTML', "⠀| 🍴 ");
-    UMI.PlayerHunger.SetAttribute("class", "healthbar");
-    UMI.HungerBar = new Element("a", "HungerBar");
+    UMI.HungerBar = new Element("progress", "HungerBar");
     UMI.HungerBar.SetAttribute("class", "healthbar");
+    UMI.HungerBar.SetAttribute("max", 100);
+    new Element("hr");
     UMI.PlayerStress = new Element('a', 'PStress');
-    UMI.PlayerStress.SetAttribute("class", "healthbar");
-    UMI.PlayerStress.Change("innerHTML", "⠀| 🤯 ");
-    UMI.StressBar = new Element("a", "StressBar");
+    UMI.PlayerStress.Change("innerHTML", "🤯 ");
+    UMI.StressBar = new Element("progress", "StressBar");
     UMI.StressBar.SetAttribute("class", "healthbar");
+    UMI.StressBar.SetAttribute("max", 100);
     UMI.PlayerPoison = new Element('a', 'PPoison');
-    UMI.PlayerPoison.SetAttribute("class", "healthbar");
     UMI.PlayerPoison.Change("innerHTML", "⠀| 🤢 ");
-    UMI.PoisonBar = new Element("a", "PoisonBar");
+    UMI.PoisonBar = new Element("progress", "PoisonBar");
     UMI.PoisonBar.SetAttribute("class", "healthbar");
+    UMI.PoisonBar.SetAttribute("max", 100);
     new Element("p");
     new Element("hr");
     UMI.PlayerStrengthIcon = new Element("a", "PStrength");
@@ -104,11 +124,11 @@ function InitPlayerStats() {
     UMI.PlayerArmorIcon = new Element("a", "PAI");
     UMI.PlayerArmorIcon.Change("innerHTML", " 🎽 ");
     UMI.PlayerArmor = new Element('a', 'PArmor');
-    UMI.PlayerArmor.SetAttribute("class", "healthbar");
     UMI.PlayerScoreIcon = new Element("a", "PEnergyI");
     UMI.PlayerScoreIcon.Change("innerHTML", "⠀| ⚡️ ");
-    UMI.PlayerScore = new Element('a', 'energy');
+    UMI.PlayerScore = new Element('progress', 'energy');
     UMI.PlayerScore.SetAttribute("class", "healthbar");
+    UMI.PlayerScore.SetAttribute("max", 100);
     UMI.PlayerBlock.Close();
 }
 
@@ -191,10 +211,10 @@ function SetReferences() {
     UMI.PlayerLevel.SetRef(Player.Level);
     UMI.PlayerMoney.SetRef(Player.Money);
     UMI.PlayerDamage.SetRef(Player.Damage);
-    UMI.HealthBar.SetRef(Player.Health);
-    UMI.HungerBar.SetRef(Player.Hunger);
-    UMI.StressBar.SetRef(Player.Stress);
-    UMI.PoisonBar.SetRef(Player.Poison);
+    UMI.HealthBar.SetAttribute("value",Player.Health);
+    UMI.HungerBar.SetAttribute("value",Player.Hunger);
+    UMI.StressBar.SetAttribute("value",Player.Stress);
+    UMI.PoisonBar.SetAttribute("value",Player.Poison);
     UMI.PlayerMenu.SetRef(Player.Name);
     UMI.PlayerStrength.SetRef(Player.Strength);
     UMI.PlayerAgility.SetRef(Player.Agility);
@@ -202,7 +222,7 @@ function SetReferences() {
     UMI.PlayerCharisma.SetRef(Player.Charisma);
     UMI.PlayerLuck.SetRef(Player.Luck);
     UMI.PlayerArmor.SetRef(Player.Armor);
-    UMI.PlayerScore.SetRef(Player.Energy);
+    UMI.PlayerScore.SetAttribute("value",Player.Energy);
     //PlayerBag
     UMI.PlayerInventory[0].SetRef(Player.Bag.Items[0].Icon);
     UMI.PlayerInventory[1].SetRef(Player.Bag.Items[1].Icon);
@@ -265,6 +285,7 @@ function InitRPS() {
 }
 
 function CreateInterface() {
+    InitLoader();
     InitRPS();
     InitDialog();
     InitPlayerStats();

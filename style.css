@@ -1,23 +1,38 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   -moz-user-select: none;
   -khtml-user-select: none;
-  user-select: none;      
+  user-select: none;
   font: 1.2em "Times New Roman", serif;
   width: 400px;
 }
+
+div {
+  border-radius: 5px;
+  border-color: black;
+  border-width: 1px;
+  border-style: groove;
+  width: 400px;
+  background: rgba(196, 196, 196, 1);
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+
 hr {
   border-top: 1px solid black;
   border: 2% solid black;
   margin-top: 1px;
   margin-bottom: 1px;
 }
-p{
+
+p {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 button {
   font: bold 13px "URW Palladio L", serif;
   border-radius: 5px;
@@ -28,16 +43,68 @@ button {
   opacity: 1;
   overflow: hidden;
 }
-div {
-  border-radius: 5px;
-  border-color: black;
-  border-width: 1px;
-  border-style:groove;
-  width: 400px;
-  background: rgba(196,196,196,1);
-  overflow: hidden;
-  margin-bottom: 2px;
+
+.messageblock {
+  position: absolute;
+  left: 100px;
+  top: 250px;
+  width: 208px;
+  height: 180px;
 }
+
+.messagebackground {
+  top: 0px;
+  position: absolute;
+  width: 400px;
+  height: 590px;
+  opacity: 0;
+}
+
+.messagemenu {
+  font-weight: bold;
+}
+
+.messagetext {
+  height: 100px;
+  overflow: auto;
+}
+
+.dialogblock {
+  height: 250px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.dialogtitle {
+  font-weight: bold;
+}
+
+.dialog {
+  height: 100px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.rpsblock {
+  position: absolute;
+  top: 100px;
+}
+
+.playermenu {
+  font-weight: bold;
+}
+
+.invblock {
+  position: fixed;
+  width: 190px;
+  height: 180px;
+  box-sizing: border-box;
+}
+
+.playermenuinventory {
+  font-weight: bold;
+}
+
 .invitem {
   border-width: 1px;
   height: 60px;
@@ -46,60 +113,10 @@ div {
   font-size: 200%;
   border-color: rgb(133, 133, 133);
 }
-.invblock {
-  position:fixed;
-  width: 190px;
-  height: 180px;
-  box-sizing: border-box;
-}
-.dialogblock {
-  height: 250px;
-  overflow: auto;
-  box-sizing: border-box;
-}
 
-.dialog {
-  height: 100px;
-  overflow: auto;
-  box-sizing: border-box;
-}
-.playermenuinventory{
-  font-weight:bold;
-}
-.dialogtitle{
-  font-weight:bold;
-}
-
-.playermenu{
-  font-weight:bold;
-}
-
-.messageblock{
-  position:absolute;
-  left: 100px;
-  top: 250px;
-  width: 208px;
-  height: 180px;
-}
-
-.messagemenu{
-  font-weight:bold;
-}
-
-.messagetext{
-  height:100px;
-  overflow: auto;
-}
-
-.messagebackground{
-  top: 0px;
-  position:absolute;
-  width: 400px;
-  height: 590px;
-  opacity: 0;
-}
-
-.rpsblock{
-  position:absolute;
-  top: 100px;
+.healthbar{
+  height: 15px;
+  border: 25px;
+  border-radius: 25px;
+  background-color: antiquewhite;
 }

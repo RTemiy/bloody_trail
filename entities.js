@@ -303,12 +303,14 @@ class RockPaperScissors {
     WinLoseChecker() {
         let d = this.playerScore - this.enemyScore;
         if (d >= 3) {
+            Info.New({text: "Победа!"});
             this.completed = true;
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
             this.winaction();
         }
         if (d <= -3) {
+            Info.New({text: "Поражение!"});
             this.completed = true;
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
