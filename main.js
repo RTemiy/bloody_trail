@@ -89,18 +89,18 @@ function InitPlayerStats() {
     UMI.PlayerHunger = new Element('a', 'PHunger');
     UMI.PlayerHunger.Change('innerHTML', "⠀| 🍴 ");
     UMI.HungerBar = new Element("progress", "HungerBar");
-    UMI.HungerBar.SetAttribute("class", "healthbar");
+    UMI.HungerBar.SetAttribute("class", "hunger");
     UMI.HungerBar.SetAttribute("max", 100);
     new Element("hr");
     UMI.PlayerStress = new Element('a', 'PStress');
     UMI.PlayerStress.Change("innerHTML", "🤯 ");
     UMI.StressBar = new Element("progress", "StressBar");
-    UMI.StressBar.SetAttribute("class", "healthbar");
+    UMI.StressBar.SetAttribute("class", "stress");
     UMI.StressBar.SetAttribute("max", 100);
     UMI.PlayerPoison = new Element('a', 'PPoison');
     UMI.PlayerPoison.Change("innerHTML", "⠀| 🤢 ");
     UMI.PoisonBar = new Element("progress", "PoisonBar");
-    UMI.PoisonBar.SetAttribute("class", "healthbar");
+    UMI.PoisonBar.SetAttribute("class", "poison");
     UMI.PoisonBar.SetAttribute("max", 100);
     new Element("p");
     new Element("hr");
@@ -127,7 +127,7 @@ function InitPlayerStats() {
     UMI.PlayerScoreIcon = new Element("a", "PEnergyI");
     UMI.PlayerScoreIcon.Change("innerHTML", "⠀| ⚡️ ");
     UMI.PlayerScore = new Element('progress', 'energy');
-    UMI.PlayerScore.SetAttribute("class", "healthbar");
+    UMI.PlayerScore.SetAttribute("class", "energy");
     UMI.PlayerScore.SetAttribute("max", 100);
     UMI.PlayerBlock.Close();
 }
