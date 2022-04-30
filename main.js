@@ -130,6 +130,8 @@ function InitInventory() {
 }
 
 function InitMessage(){
+    UMI.MessageBackground = new Element("div", "MessageBackground");
+    UMI.MessageBackground.SetAttribute("class", "messagebackground");
     UMI.MessageBlock = new Element("div", "MessageBlock", false);
     UMI.MessageBlock.SetAttribute("class", "messageblock");
     UMI.MessageMenu = new Element("p", "MessageMenu");
@@ -212,6 +214,7 @@ function SetReferences() {
     UMI.PlayerInventory[7].SetRef(Player.Bag.Items[7].Icon);
     UMI.PlayerInventory[8].SetRef(Player.Bag.Items[8].Icon);
     //Message
+    UMI.MessageBackground.HideOrNot(Info.hidden);
     UMI.MessageBlock.HideOrNot(Info.hidden);
     UMI.MessageMenu.SetRef(Info.title);
     UMI.MessageText.SetRef(Info.text);
@@ -225,7 +228,7 @@ function SetReferences() {
 
 function InitRPS() {
     UMI.RPSBlock = new Element("div", "RPSBlock", false);
-    UMI.RPSBlock.SetAttribute("class", "playerblock");
+    UMI.RPSBlock.SetAttribute("class", "rpsblock");
     UMI.RPSBlock.Change("align", "middle");
     UMI.RPSMenu = new Element('p', 'RPSMenu');
     UMI.RPSMenu.Change("innerHTML", "Камень, ножницы, бумага");

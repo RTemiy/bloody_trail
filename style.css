@@ -87,3 +87,16 @@ div {
   height:100px;
   overflow: auto;
 }
+
+.messagebackground{
+  top: 0px;
+  position:absolute;
+  width: 400px;
+  height: 590px;
+  opacity: 0;
+}
+
+.rpsblock{
+  position:absolute;
+  top: 100px;
+}
