@@ -5,12 +5,12 @@ body {
   -moz-user-select: none;
   -khtml-user-select: none;
   user-select: none;      
-  font: "Times New Roman", serif;
+  font: 1.2em "Times New Roman", serif;
   width: 400px;
 }
 hr {
   border-top: 1px solid black;
-  border: 1% solid black;
+  border: 2% solid black;
   margin-top: 1px;
   margin-bottom: 1px;
 }
