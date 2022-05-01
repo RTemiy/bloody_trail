@@ -30,14 +30,18 @@ class Character extends Entity {
     constructor(values) {
         super(values);
         this.MinHealth = values.minhealth || 0;
-        this.MaxHealth = values.health;
+        this.MaxHealth = values.health || 100;
         this.Bag = values.inventory || null;
         this.Score = 0;
         this.me = this;
+        this.Tick = 2000;
+        this.HungerPerTick = 2;
+        this.EnergyPerTick = 1;
+        this.PoisonPerTick = 3;
     }
     isAlive() {
-        if (this.Health <= 0 ||
-            this.Energy <= 0) {
+        if (this.Health <= this.MinHealth ||
+            this.Energy <= this.MinHealth) {
             this.Completed = true;
         }
         else {
@@ -46,60 +50,69 @@ class Character extends Entity {
     }
     MinSolver() {
         //Minimal values
-        if (this.Stress <= 0) {
-            this.Stress = 0;
+        if (this.Stress <= this.MinHealth) {
+            this.Stress = this.MinHealth;
         }
-        if (this.Poison <= 0) {
-            this.Poison = 0;
+        if (this.Poison <= this.MinHealth) {
+            this.Poison = this.MinHealth;
         }
-        if (this.Hunger >= 100) {
-            this.Hunger = 100;
+        if (this.Hunger >= this.MaxHealth) {
+            this.Hunger = this.MaxHealth;
         }
-        if (this.Health >= 100) {
-            this.Health = 100;
+        if (this.Health >= this.MaxHealth) {
+            this.Health = this.MaxHealth;
         }
-        if (this.Energy < 1) {
-            this.Energy = 0;
+        if (this.Energy <= this.MinHealth) {
+            this.Energy = this.MinHealth;
         }
-        if (this.Energy >= 100) {
-            this.Energy = 100;
+        if (this.Energy >= this.MaxHealth) {
+            this.Energy = this.MaxHealth;
         }
         //Negative values
-        if (this.Hunger <= 0) {
-            this.Hunger = 0;
-            this.Health -= 3;
+        if (this.Hunger <= this.MinHealth) {
+            this.Hunger = this.MinHealth;
+            this.Health -= this.HungerPerTick;
         }
-        if (this.Poison >= 100) {
-            this.Poison = 100;
-            this.Health -= 4;
+        if (this.Poison >= this.MaxHealth) {
+            this.Poison = this.MaxHealth;
+            this.Health -= this.Poison;
         }
-        if (this.Stress >= 100) {
-            this.Stress = 100;
-            this.Health -= 2;
+        if (this.Stress >= this.MaxHealth) {
+            this.Stress = this.MaxHealth;
+            this.Health -= this.PoisonPerTick;
         }
     }
-    Use(entity) {      
-            if (entity.Type == "Wearable") {
-                this.Unwear(entity);
-            } else {
-                switch (entity.Type) {
-                    case "Food":
-                        let use = new SoundEntity("Sounds/Food.mp3");
-                        use.Play();
-                        break;
-                }
-                this.me.Level += entity.Level
-                this.me.Health += entity.Health;
-                this.me.Armor += entity.Armor;
-                this.me.Damage += entity.Damage;
-                this.me.Stress += entity.Stress;
-                this.me.Poison += entity.Poison;
-                this.me.Hunger += entity.Hunger;
-                this.me.Energy += entity.Energy;
-                entity.Icon = "";
-                entity.Completed = true;
+    Use(entity) {
+        if (entity.Type == "Wearable") {
+            this.Unwear(entity);
+        } else {
+            switch (entity.Type) {
+                case "Food":
+                    let use = new SoundEntity("Sounds/Food.mp3");
+                    use.Play();
+                    break;
             }
-        }            
+            this.me.Level += entity.Level
+            this.me.Health += entity.Health;
+            this.me.Armor += entity.Armor;
+            this.me.Damage += entity.Damage;
+            this.me.Stress += entity.Stress;
+            this.me.Poison += entity.Poison;
+            this.me.Hunger += entity.Hunger;
+            this.me.Energy += entity.Energy;
+            entity.Icon = "";
+            entity.Completed = true;
+        }
+    }
+    WearItem(entity) {
+        this.Level += entity.Level
+        this.Health += entity.Health;
+        this.Armor += entity.Armor;
+        this.Damage += entity.Damage;
+        this.Stress += entity.Stress;
+        this.Poison += entity.Poison;
+        this.Hunger += entity.Hunger;
+    }
     Unwear(entity) {
         this.Level -= entity.Level
         this.Health -= entity.Health;
@@ -121,16 +134,22 @@ class Character extends Entity {
             money.Play();
             this.Money -= entity.Cost;
             this.Bag.AddItem(entity);
+            if (entity.Type == "Wearable") {
+                this.WearItem(entity);
+            }
+        }
+        else{
+            Info.New({text:"Недостаточно денег!"});
         }
     }
     LiveLife() {
-        this.Energy -= 2;
-        this.Hunger -= 1;
+        this.Energy -= this.EnergyPerTick;
+        this.Hunger -= this.HungerPerTick;
         this.MinSolver();
         this.isAlive();
     }
     Start() {
-        setInterval(() => this.LiveLife(), 2000);
+        setInterval(() => this.LiveLife(), this.Tick);
     }
 }
 
@@ -154,25 +173,6 @@ class Inventory {
                 break;
             }
         }
-    }
-    WearItem(entity, object) {
-        for (let y = 0; y < this.MaxCells; y++) {
-            if (this.Items[y].Completed == true) {
-                for (let key in entity) {
-                    this.Items[y][key] = entity[key];
-                }
-                entity.Completed = true;
-                break;
-            }
-        }
-        object.Level += entity.Level
-        object.Health += entity.Health;
-        object.Armor += entity.Armor;
-        object.Damage += entity.Damage;
-        object.Stress += entity.Stress;
-        object.Poison += entity.Poison;
-        object.Hunger += entity.Hunger;
-        object.MinChecker();
     }
     HavePlace() {
         var amount = 0;
@@ -248,6 +248,8 @@ class Dialog {
 class RockPaperScissors {
     constructor(d, w, l, empty) {
         this.Dict = ["✊", "✌️", "✋"];
+        this.winscore = 3;
+        this.losescore = -3;
         this.difficulty = d;
         this.enemyScore = 0;
         this.enemyTurn = "";
@@ -281,36 +283,36 @@ class RockPaperScissors {
     Comparison() {
         if (this.enemyTurn == this.playerTurn) {
         }
-        if (this.enemyTurn == "✊" && this.playerTurn == "✋") {
+        if (this.enemyTurn == this.Dict[0] && this.playerTurn == this.Dict[2]) {
             this.playerScore++;
         }
-        if (this.enemyTurn == "✊" && this.playerTurn == "✌️") {
+        if (this.enemyTurn == this.Dict[0] && this.playerTurn == this.Dict[1]) {
             this.enemyScore++;
         }
-        if (this.enemyTurn == "✋" && this.playerTurn == "✊") {
+        if (this.enemyTurn == this.Dict[2] && this.playerTurn == this.Dict[0]) {
             this.enemyScore++;
         }
-        if (this.enemyTurn == "✋" && this.playerTurn == "✌️") {
+        if (this.enemyTurn == this.Dict[2] && this.playerTurn == this.Dict[1]) {
             this.playerScore++;
         }
-        if (this.enemyTurn == "✌️" && this.playerTurn == "✊") {
+        if (this.enemyTurn == this.Dict[1] && this.playerTurn == this.Dict[0]) {
             this.playerScore++;
         }
-        if (this.enemyTurn == "✌️" && this.playerTurn == "✋") {
+        if (this.enemyTurn == this.Dict[1] && this.playerTurn == this.Dict[2]) {
             this.enemyScore++;
         }
     }
     WinLoseChecker() {
         let d = this.playerScore - this.enemyScore;
-        if (d >= 3) {
-            Info.New({ypos: 500,text: "Победа!"});
+        if (d >= this.winscore) {
+            Info.New({ text: "Победа!" });
             this.completed = true;
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();
             this.winaction();
         }
-        if (d <= -3) {
-            Info.New({text: "Поражение!"});
+        if (d <= this.losescore) {
+            Info.New({ text: "Поражение!" });
             this.completed = true;
             let lose = new SoundEntity("Sounds/Lose.mp3");
             lose.Play();
