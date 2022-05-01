@@ -92,32 +92,37 @@ class Element {
         this.HiddenChecker();
         this.SetAdditionalAttribute();
     }
+    Style(s,w){
+        document.getElementById(this.id).style[s]=w;
+    }
 }
 
 //MESSAGE
 class Message {
-    constructor() {        
+    constructor() {
         this.hidden = true;
     }
-    New(values){
+    New(values) {
         this.hidden = false;
         this.buttonokhidden = false;
         this.buttondenyhidden = false;
-        var values = values;        
+        this.xpos = values.xpos || 100;
+        this.ypos = values.ypos || 250;
+        var values = values;
         this.title = values.title || "✉️ Сообщение";
         this.text = values.text;
         this.action = values.action;
         this.deny = values.deny;
-        this.buttonok = "✔️" || values.buttonoktext;        
-        this.buttondeny = "❌" || values.buttondenytext; 
-        if(this.deny==undefined && this.action==undefined){this.buttondenyhidden = true; this.action=function(){return("nothing")}}    
+        this.buttonok = "✔️" || values.buttonoktext;
+        this.buttondeny = "❌" || values.buttondenytext;
+        if (this.deny == undefined && this.action == undefined) { this.buttondenyhidden = true; this.action = function () { return ("nothing") } }
     }
-    OK(){
-        this.hidden=true;
+    OK() {
+        this.hidden = true;
         this.action();
     }
-    Deny(){
-        this.hidden=true;
+    Deny() {
+        this.hidden = true;
         this.deny();
     }
 }

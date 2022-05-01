@@ -46,8 +46,6 @@ button {
 
 .messageblock {
   position: absolute;
-  left: 100px;
-  top: 250px;
   width: 208px;
   height: 180px;
 }

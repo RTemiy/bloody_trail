@@ -87,7 +87,7 @@ function InitPlayerStats() {
     UMI.HealthBar.SetAttribute("class", "healthbar");
     UMI.HealthBar.SetAttribute("max", 100);
     UMI.PlayerHunger = new Element('a', 'PHunger');
-    UMI.PlayerHunger.Change('innerHTML', "⠀| 🍴 ");
+    UMI.PlayerHunger.Change('innerHTML', "⠀| 🍖 ");
     UMI.HungerBar = new Element("progress", "HungerBar");
     UMI.HungerBar.SetAttribute("class", "hunger");
     UMI.HungerBar.SetAttribute("max", 100);
@@ -143,7 +143,7 @@ function InitInventory() {
     for (x = 0; x < Player.Bag.MaxCells; x++) {
         UMI.PlayerInventory.push(new Element('button', 'inv' + x));
         UMI.PlayerInventory[x].SetAttribute("class", "invitem");
-        UMI.PlayerInventory[x].SetAttribute("onclick", "Info.New({ title: Player.Bag.Items[" + x + "].Name, text: Player.Bag.Items[" + x + "].Title, action: function(){Player.Use(Player.Bag.Items[" + x + "])}})");
+        UMI.PlayerInventory[x].SetAttribute("onclick", "Info.New({ title: Player.Bag.Items[" + x + "].Name, xpos: 190,ypos: 427, text: Player.Bag.Items[" + x + "].Title, action: function(){Player.Use(Player.Bag.Items[" + x + "])}})");
     }
     
     UMI.InventoryBlock.Close();
@@ -234,6 +234,8 @@ function SetReferences() {
     UMI.PlayerInventory[7].SetRef(Player.Bag.Items[7].Icon);
     UMI.PlayerInventory[8].SetRef(Player.Bag.Items[8].Icon);
     //Message
+    UMI.MessageBlock.Style("top",Info.ypos+"px");
+    UMI.MessageBlock.Style("left",Info.xpos+"px");
     UMI.MessageBackground.HideOrNot(Info.hidden);
     UMI.MessageBlock.HideOrNot(Info.hidden);
     UMI.MessageMenu.SetRef(Info.title);
