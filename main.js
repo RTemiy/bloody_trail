@@ -31,7 +31,7 @@ var Player = new Character({
 var b;
 function InitLoader(){
 
-    var max = 58;    
+    var max = 60;    
     if(b == undefined){
         b=true;
         UMI.Loader = new Element("progress","loader");
@@ -50,12 +50,9 @@ function InitLoader(){
 }
 function InitDialog() {
     UMI.DialogBlock = new Element("div", "DialogBlock", false);
-    UMI.DialogBlock.SetAttribute("class", "dialogblock");
     UMI.DialogTitle = new Element("p", "DialogTitle");
-    UMI.DialogTitle.SetAttribute("class", "dialogtitle");
     new Element("hr");
     UMI.Dialog = new Element("p", "Dialog");
-    UMI.Dialog.SetAttribute("class", "dialog");
     new Element("hr");
     UMI.SelectionButtons = [];
     for (var u = 0; u < 5; u++) {
@@ -66,10 +63,8 @@ function InitDialog() {
 
 function InitPlayerStats() {
     UMI.PlayerBlock = new Element("div", "PlayerBlock", false);
-    UMI.PlayerBlock.SetAttribute("class", "playerblock");
     UMI.PlayerMenu = new Element('p', 'PlayerMenu');
     UMI.PlayerMenu.Change("innerHTML", "👤 Игрок");
-    UMI.PlayerMenu.SetAttribute("class", "playermenu");
     new Element("hr");
     UMI.PlayerLevelIcon = new Element("a", "PLI");
     UMI.PlayerLevelIcon.Change("innerHTML", "🏆 ");
@@ -134,15 +129,13 @@ function InitPlayerStats() {
 
 function InitInventory() {
     UMI.InventoryBlock = new Element("div", "InventoryBlock", false);
-    UMI.InventoryBlock.SetAttribute("class", "invblock");
     UMI.PlayerMenuInventory = new Element("p", "PlayerMenuInventory");
     UMI.PlayerMenuInventory.Change("innerHTML", "🎒 Рюкзак");
-    UMI.PlayerMenuInventory.SetAttribute("class", "playermenuinventory");
     new Element("hr");
     UMI.PlayerInventory = [];
     for (x = 0; x < Player.Bag.MaxCells; x++) {
         UMI.PlayerInventory.push(new Element('button', 'inv' + x));
-        UMI.PlayerInventory[x].SetAttribute("class", "invitem");
+        UMI.PlayerInventory[x].SetAttribute('class','invitem');
         UMI.PlayerInventory[x].SetAttribute("onclick", "Info.New({ title: Player.Bag.Items[" + x + "].Name, xpos: 190,ypos: 427, text: Player.Bag.Items[" + x + "].Title, action: function(){Player.Use(Player.Bag.Items[" + x + "])}})");
     }
     
@@ -151,15 +144,11 @@ function InitInventory() {
 
 function InitMessage(){
     UMI.MessageBackground = new Element("div", "MessageBackground");
-    UMI.MessageBackground.SetAttribute("class", "messagebackground");
     UMI.MessageBlock = new Element("div", "MessageBlock", false);
-    UMI.MessageBlock.SetAttribute("class", "messageblock");
     UMI.MessageMenu = new Element("p", "MessageMenu");
     UMI.MessageMenu.Change("innerHTML", "✉️ Сообщение");
-    UMI.MessageMenu.SetAttribute("class", "messagemenu");
     new Element("hr");
     UMI.MessageText = new Element("p","MessageText");
-    UMI.MessageText.SetAttribute("class", "messagetext");
     UMI.MesBut01 = new Element("button", "MesBut01");
     UMI.MesBut02 = new Element("button", "MesBut02");
     UMI.MessageBlock.Close();    
@@ -250,7 +239,6 @@ function SetReferences() {
 
 function InitRPS() {
     UMI.RPSBlock = new Element("div", "RPSBlock", false);
-    UMI.RPSBlock.SetAttribute("class", "rpsblock");
     UMI.RPSBlock.Change("align", "middle");
     UMI.RPSMenu = new Element('p', 'RPSMenu');
     UMI.RPSMenu.Change("innerHTML", "Камень, ножницы, бумага");
@@ -277,13 +265,21 @@ function InitRPS() {
     UMI.RockButton.SetAttribute("class", "invitem");
     UMI.ScissorsButton = new Element("button", "ScissorsButton");
     UMI.ScissorsButton.Change("innerHTML", "✌️");
-    UMI.ScissorsButton.SetAttribute("class", "invitem");
-    
+    UMI.ScissorsButton.SetAttribute("class", "invitem");    
     UMI.PaperButton = new Element("button", "PaperButton");
     UMI.PaperButton.Change("innerHTML", "✋");
     UMI.PaperButton.SetAttribute("class", "invitem");
     UMI.RPSBlock.Close();
     UMI.RPSBlock.HideOrNot(true);
+}
+
+function InitSaveload(){
+    UMI.LoadSave = new Element('div', 'LoadSave', false);   
+    UMI.LoadSaveMenu = new Element('p', 'LoadSaveMenu'); 
+    UMI.LoadSaveMenu.Change("innerHTML", "Сохранение и загрузка");
+    new Element("hr");
+    UMI.LoadSave.Close();
+
 }
 
 function CreateInterface() {
@@ -293,6 +289,7 @@ function CreateInterface() {
     InitPlayerStats();
     InitInventory();
     InitMessage();
+    InitSaveload();
     setInterval(() => SetReferences(), 100);
     
     UMI.Version = new Element("a", "Version");

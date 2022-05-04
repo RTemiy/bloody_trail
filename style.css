@@ -44,13 +44,13 @@ button {
   overflow: hidden;
 }
 
-.messageblock {
+#MessageBlock {
   position: absolute;
   width: 208px;
   height: 180px;
 }
 
-.messagebackground {
+#MessageBackground {
   top: 0px;
   position: absolute;
   width: 400px;
@@ -58,48 +58,40 @@ button {
   opacity: 0;
 }
 
-.messagemenu {
-  font-weight: bold;
-}
-
-.messagetext {
+#MessageText {
   height: 100px;
   overflow: auto;
 }
 
-.dialogblock {
+#DialogBlock {
   height: 250px;
   overflow: auto;
   box-sizing: border-box;
 }
 
-.dialogtitle {
-  font-weight: bold;
-}
-
-.dialog {
+#Dialog {
   height: 100px;
   overflow: auto;
   box-sizing: border-box;
 }
 
-.rpsblock {
+#RPSBlock {
   position: fixed;
   top: 100px;
 }
 
-.playermenu {
-  font-weight: bold;
-}
-
-.invblock {
-  position: fixed;
+#InventoryBlock {
+  
   width: 190px;
   height: 180px;
   box-sizing: border-box;
 }
 
-.playermenuinventory {
+#LoadSave {
+  width: 190px;
+}
+
+#PlayerMenuInventory, #PlayerMenu, #DialogTitle, #MessageMenu, #LoadSaveMenu {
   font-weight: bold;
 }
 
