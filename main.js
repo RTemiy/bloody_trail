@@ -31,7 +31,7 @@ var Player = new Character({
 var b;
 function InitLoader(){
 
-    var max = 60;    
+    var max = 62;    
     if(b == undefined){
         b=true;
         UMI.Loader = new Element("progress","loader");
@@ -48,6 +48,17 @@ function InitLoader(){
         UMI.Loader.HideOrNot(true);
     }
 }
+
+function SaveMemory(){
+    localStorage.setItem('CurLev', Script.Actual);
+    Info.New({text: 'Игра сохранена!'});
+}
+
+function LoadMemory(){
+    Script.Actual = localStorage.getItem('CurLev');
+    Info.New({text: 'Игра загружена!'});
+}
+
 function InitDialog() {
     UMI.DialogBlock = new Element("div", "DialogBlock", false);
     UMI.DialogTitle = new Element("p", "DialogTitle");
@@ -280,8 +291,10 @@ function InitSaveload(){
     new Element("hr");
     UMI.SaveButton = new Element('button', "SaveButton");
     UMI.SaveButton.Change("innerHTML", "📥 Сохранить");
+    UMI.SaveButton.SetAttribute('onclick', "SaveMemory()");
     UMI.LoadButton = new Element('button', "LoadButton");
     UMI.LoadButton.Change("innerHTML", "📤 Загрузить");
+    UMI.LoadButton.SetAttribute('onclick', "LoadMemory()");
     UMI.LoadSave.Close();
 
 }
