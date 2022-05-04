@@ -51,11 +51,37 @@ function InitLoader(){
 
 function SaveMemory(){
     localStorage.setItem('CurLev', Script.Actual);
+    localStorage.setItem('PlayerH', Player.Health);
+    localStorage.setItem('PlayerA', Player.Armor);
+    localStorage.setItem('PlayerD', Player.Damage);
+    localStorage.setItem('PlayerHu', Player.Hunger);
+    localStorage.setItem('PlayerS', Player.Stress);
+    localStorage.setItem('PlayerP', Player.Poison);
+    localStorage.setItem('PlayerM', Player.Money);
+    localStorage.setItem('PlayerE', Player.Energy);
+    localStorage.setItem('PlayerC', Player.Charisma);
+    localStorage.setItem('PlayerStr', Player.Strength);
+    localStorage.setItem('PlayerAg', Player.Agility);
+    localStorage.setItem('PlayerI', Player.Intelligence);
+    localStorage.setItem('PlayerL', Player.Luck);
     Info.New({text: 'Игра сохранена!'});
 }
 
 function LoadMemory(){
     Script.Actual = localStorage.getItem('CurLev');
+    Player.Health = localStorage.getItem('PlayerH');
+    Player.Armor = localStorage.getItem('PlayerA');
+    Player.Damage =localStorage.getItem('PlayerD');
+    Player.Hunger =localStorage.getItem('PlayerHu');
+    Player.Stress =localStorage.getItem('PlayerS');
+    Player.Poison =localStorage.getItem('PlayerP');
+    Player.Money = localStorage.getItem('PlayerM');
+    Player.Energy =localStorage.getItem('PlayerE');
+    Player.Charisma =localStorage.getItem('PlayerC');
+    Player.Strength =localStorage.getItem('PlayerStr');
+    Player.Agility =localStorage.getItem('PlayerAg');
+    Player.Intelligence = localStorage.getItem('PlayerI');
+    Player.Luck =localStorage.getItem('PlayerL');
     Info.New({text: 'Игра загружена!'});
 }
 
