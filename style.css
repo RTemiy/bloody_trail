@@ -87,8 +87,16 @@ button {
   box-sizing: border-box;
 }
 
+:link:hover{
+  outline: dotted red;
+}
+
 #LoadSave {
   width: 190px;
+}
+
+#LoadSaveMenu{
+  display: none;
 }
 
 #PlayerMenuInventory, #PlayerMenu, #DialogTitle, #MessageMenu, #LoadSaveMenu {
