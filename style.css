@@ -80,23 +80,21 @@ button {
   top: 100px;
 }
 
-#InventoryBlock {
-  
+#InventoryBlock {  
   width: 190px;
   height: 180px;
   box-sizing: border-box;
 }
 
-:link:hover{
-  outline: dotted red;
+#LoadButton, #SaveButton{
+  display:none;
+}
+#LoadSave:hover > button  {
+  display:block;
 }
 
 #LoadSave {
   width: 190px;
-}
-
-#LoadSaveMenu{
-  display: none;
 }
 
 #PlayerMenuInventory, #PlayerMenu, #DialogTitle, #MessageMenu, #LoadSaveMenu {
@@ -104,6 +102,15 @@ button {
 }
 
 .invitem {
+  border-width: 1px;
+  height: 60px;
+  width: 60px;
+  margin: 0px;
+  font-size: 200%;
+  border-color: rgb(133, 133, 133);
+}
+
+.rpsitem {
   border-width: 1px;
   height: 60px;
   width: 60px;
@@ -144,4 +151,8 @@ progress::-webkit-progress-bar{
 
 .energy::-webkit-progress-value{
   background-color:rgb(233, 71, 255);
+}
+
+#Version{
+  position: relative;
 }

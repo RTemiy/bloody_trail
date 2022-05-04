@@ -253,22 +253,22 @@ function InitRPS() {
     UMI.RPSEnemy.Change("innerHTML", " Противник");
     new Element("hr");
     UMI.RPSPlayerTurn = new Element('a', 'RPSPlayerTurn');
-    UMI.RPSPlayerTurn.SetAttribute("class", "invitem");
+    UMI.RPSPlayerTurn.SetAttribute("class", "rpsitem");
     UMI.RPSStick = new Element('a', 'RPSStick');
     UMI.RPSStick.Change("innerHTML", "|");
-    UMI.RPSStick.SetAttribute("class", "invitem");
+    UMI.RPSStick.SetAttribute("class", "rpsitem");
     UMI.RPSEnemyTurn = new Element('a', 'RPSEnemyTurn');
-    UMI.RPSEnemyTurn.SetAttribute("class", "invitem");
+    UMI.RPSEnemyTurn.SetAttribute("class", "rpsitem");
     new Element("hr");
     UMI.RockButton = new Element("button", "RockButton");
     UMI.RockButton.Change("innerHTML", "✊");
-    UMI.RockButton.SetAttribute("class", "invitem");
+    UMI.RockButton.SetAttribute("class", "rpsitem");
     UMI.ScissorsButton = new Element("button", "ScissorsButton");
     UMI.ScissorsButton.Change("innerHTML", "✌️");
-    UMI.ScissorsButton.SetAttribute("class", "invitem");    
+    UMI.ScissorsButton.SetAttribute("class", "rpsitem");    
     UMI.PaperButton = new Element("button", "PaperButton");
     UMI.PaperButton.Change("innerHTML", "✋");
-    UMI.PaperButton.SetAttribute("class", "invitem");
+    UMI.PaperButton.SetAttribute("class", "rpsitem");
     UMI.RPSBlock.Close();
     UMI.RPSBlock.HideOrNot(true);
 }
@@ -276,8 +276,12 @@ function InitRPS() {
 function InitSaveload(){
     UMI.LoadSave = new Element('div', 'LoadSave', false);   
     UMI.LoadSaveMenu = new Element('p', 'LoadSaveMenu'); 
-    UMI.LoadSaveMenu.Change("innerHTML", "Сохранение и загрузка");
+    UMI.LoadSaveMenu.Change("innerHTML", "🎬 Сохранение/загрузка");
     new Element("hr");
+    UMI.SaveButton = new Element('button', "SaveButton");
+    UMI.SaveButton.Change("innerHTML", "📥 Сохранить");
+    UMI.LoadButton = new Element('button', "LoadButton");
+    UMI.LoadButton.Change("innerHTML", "📤 Загрузить");
     UMI.LoadSave.Close();
 
 }
