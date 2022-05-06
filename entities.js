@@ -33,7 +33,6 @@ class Character extends Entity {
         this.MaxHealth = values.health || 100;
         this.Bag = values.inventory || null;
         this.Score = 0;
-        this.me = this;
         this.Tick = 2000;
         this.HungerPerTick = 2;
         this.EnergyPerTick = 1;
@@ -92,14 +91,14 @@ class Character extends Entity {
                     use.Play();
                     break;
             }
-            this.me.Level += entity.Level
-            this.me.Health += entity.Health;
-            this.me.Armor += entity.Armor;
-            this.me.Damage += entity.Damage;
-            this.me.Stress += entity.Stress;
-            this.me.Poison += entity.Poison;
-            this.me.Hunger += entity.Hunger;
-            this.me.Energy += entity.Energy;
+            this.Level += entity.Level
+            this.Health += entity.Health;
+            this.Armor += entity.Armor;
+            this.Damage += entity.Damage;
+            this.Stress += entity.Stress;
+            this.Poison += entity.Poison;
+            this.Hunger += entity.Hunger;
+            this.Energy += entity.Energy;
             entity.Icon = "";
             entity.Completed = true;
         }
@@ -138,8 +137,8 @@ class Character extends Entity {
                 this.WearItem(entity);
             }
         }
-        else{
-            Info.New({text:"Недостаточно денег!"});
+        else {
+            Info.New({ text: "Недостаточно денег!" });
         }
     }
     LiveLife() {
@@ -175,7 +174,7 @@ class Inventory {
         }
     }
     HavePlace() {
-        var amount = 0;
+        let amount = 0;
         for (let y = 0; y < this.MaxCells; y++) {
             if (this.Items[y].Completed == false)
                 amount++;
@@ -339,7 +338,7 @@ class SkillTest {
     }
     Check(CharacterChar) {
         this.SwitchDifficulty();
-        var res = Math.floor(Math.random() * this.dice) + CharacterChar;
+        let res = Math.floor(Math.random() * this.dice) + CharacterChar;
         if (res >= this.difficulty) {
             let win = new SoundEntity("Sounds/Win.mp3");
             win.Play();

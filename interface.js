@@ -142,17 +142,3 @@ class SoundEntity {
         this['audio'].play();
     }
 }
-
-class Memory {
-    constructor(a){
-        var names = a;
-    }
-    Save(){
-        for(keys in names){
-        localStorage.setItem(key);
-        }
-    }
-    Load(){
-
-    }
-}

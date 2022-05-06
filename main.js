@@ -6,7 +6,7 @@ script.js
 */
 //VARIABLES
 var UMI = {};
-var Info = new Message({title:''});
+var Info = new Message({ title: '' });
 var Player = new Character({
     name: "🌡 Показатели персонажа:",
     level: 1,
@@ -28,28 +28,8 @@ var Player = new Character({
 });
 
 //PROGRAM BODY
-var b;
-function InitLoader(){
 
-    var max = 62;    
-    if(b == undefined){
-        b=true;
-        UMI.Loader = new Element("progress","loader");
-        UMI.Loader.SetAttribute("max", max);
-    }   
-    var v = 0;
-    v=Object.keys(UMI).length;    
-    UMI.Loader.SetAttribute("value", v);
-    
-    if(v!=max){
-    setTimeout(()=>{InitLoader();},100);
-    }
-    else{
-        UMI.Loader.HideOrNot(true);
-    }
-}
-
-function SaveMemory(){
+function SaveMemory() {
     localStorage.setItem('CurLev', Script.Actual);
     localStorage.setItem('PlayerH', Player.Health);
     localStorage.setItem('PlayerA', Player.Armor);
@@ -64,25 +44,25 @@ function SaveMemory(){
     localStorage.setItem('PlayerAg', Player.Agility);
     localStorage.setItem('PlayerI', Player.Intelligence);
     localStorage.setItem('PlayerL', Player.Luck);
-    Info.New({text: 'Игра сохранена!'});
+    Info.New({ text: 'Игра сохранена!' });
 }
 
-function LoadMemory(){
+function LoadMemory() {
     Script.Actual = localStorage.getItem('CurLev');
     Player.Health = localStorage.getItem('PlayerH');
     Player.Armor = localStorage.getItem('PlayerA');
-    Player.Damage =localStorage.getItem('PlayerD');
-    Player.Hunger =localStorage.getItem('PlayerHu');
-    Player.Stress =localStorage.getItem('PlayerS');
-    Player.Poison =localStorage.getItem('PlayerP');
+    Player.Damage = localStorage.getItem('PlayerD');
+    Player.Hunger = localStorage.getItem('PlayerHu');
+    Player.Stress = localStorage.getItem('PlayerS');
+    Player.Poison = localStorage.getItem('PlayerP');
     Player.Money = localStorage.getItem('PlayerM');
-    Player.Energy =localStorage.getItem('PlayerE');
-    Player.Charisma =localStorage.getItem('PlayerC');
-    Player.Strength =localStorage.getItem('PlayerStr');
-    Player.Agility =localStorage.getItem('PlayerAg');
+    Player.Energy = localStorage.getItem('PlayerE');
+    Player.Charisma = localStorage.getItem('PlayerC');
+    Player.Strength = localStorage.getItem('PlayerStr');
+    Player.Agility = localStorage.getItem('PlayerAg');
     Player.Intelligence = localStorage.getItem('PlayerI');
-    Player.Luck =localStorage.getItem('PlayerL');
-    Info.New({text: 'Игра загружена!'});
+    Player.Luck = localStorage.getItem('PlayerL');
+    Info.New({ text: 'Игра загружена!' });
 }
 
 function InitDialog() {
@@ -92,10 +72,10 @@ function InitDialog() {
     UMI.Dialog = new Element("p", "Dialog");
     new Element("hr");
     UMI.SelectionButtons = [];
-    for (var u = 0; u < 5; u++) {
+    for (let u = 0; u < 5; u++) {
         UMI.SelectionButtons.push(new Element("button", "SelectionButton" + u));
     }
-    UMI.DialogBlock.Close();  
+    UMI.DialogBlock.Close();
 }
 
 function InitPlayerStats() {
@@ -172,23 +152,22 @@ function InitInventory() {
     UMI.PlayerInventory = [];
     for (x = 0; x < Player.Bag.MaxCells; x++) {
         UMI.PlayerInventory.push(new Element('button', 'inv' + x));
-        UMI.PlayerInventory[x].SetAttribute('class','invitem');
+        UMI.PlayerInventory[x].SetAttribute('class', 'invitem');
         UMI.PlayerInventory[x].SetAttribute("onclick", "Info.New({ title: Player.Bag.Items[" + x + "].Name, xpos: 190,ypos: 427, text: Player.Bag.Items[" + x + "].Title, action: function(){Player.Use(Player.Bag.Items[" + x + "])}})");
     }
-    
     UMI.InventoryBlock.Close();
 }
 
-function InitMessage(){
+function InitMessage() {
     UMI.MessageBackground = new Element("div", "MessageBackground");
     UMI.MessageBlock = new Element("div", "MessageBlock", false);
     UMI.MessageMenu = new Element("p", "MessageMenu");
     UMI.MessageMenu.Change("innerHTML", "✉️ Сообщение");
     new Element("hr");
-    UMI.MessageText = new Element("p","MessageText");
+    UMI.MessageText = new Element("p", "MessageText");
     UMI.MesBut01 = new Element("button", "MesBut01");
     UMI.MesBut02 = new Element("button", "MesBut02");
-    UMI.MessageBlock.Close();    
+    UMI.MessageBlock.Close();
 }
 
 function SetReferences() {
@@ -237,10 +216,10 @@ function SetReferences() {
     UMI.PlayerLevel.SetRef(Player.Level);
     UMI.PlayerMoney.SetRef(Player.Money);
     UMI.PlayerDamage.SetRef(Player.Damage);
-    UMI.HealthBar.SetAttribute("value",Player.Health);
-    UMI.HungerBar.SetAttribute("value",Player.Hunger);
-    UMI.StressBar.SetAttribute("value",Player.Stress);
-    UMI.PoisonBar.SetAttribute("value",Player.Poison);
+    UMI.HealthBar.SetAttribute("value", Player.Health);
+    UMI.HungerBar.SetAttribute("value", Player.Hunger);
+    UMI.StressBar.SetAttribute("value", Player.Stress);
+    UMI.PoisonBar.SetAttribute("value", Player.Poison);
     UMI.PlayerMenu.SetRef(Player.Name);
     UMI.PlayerStrength.SetRef(Player.Strength);
     UMI.PlayerAgility.SetRef(Player.Agility);
@@ -248,7 +227,7 @@ function SetReferences() {
     UMI.PlayerCharisma.SetRef(Player.Charisma);
     UMI.PlayerLuck.SetRef(Player.Luck);
     UMI.PlayerArmor.SetRef(Player.Armor);
-    UMI.PlayerScore.SetAttribute("value",Player.Energy);
+    UMI.PlayerScore.SetAttribute("value", Player.Energy);
     //PlayerBag
     UMI.PlayerInventory[0].SetRef(Player.Bag.Items[0].Icon);
     UMI.PlayerInventory[1].SetRef(Player.Bag.Items[1].Icon);
@@ -260,8 +239,8 @@ function SetReferences() {
     UMI.PlayerInventory[7].SetRef(Player.Bag.Items[7].Icon);
     UMI.PlayerInventory[8].SetRef(Player.Bag.Items[8].Icon);
     //Message
-    UMI.MessageBlock.Style("top",Info.ypos+"px");
-    UMI.MessageBlock.Style("left",Info.xpos+"px");
+    UMI.MessageBlock.Style("top", Info.ypos + "px");
+    UMI.MessageBlock.Style("left", Info.xpos + "px");
     UMI.MessageBackground.HideOrNot(Info.hidden);
     UMI.MessageBlock.HideOrNot(Info.hidden);
     UMI.MessageMenu.SetRef(Info.title);
@@ -270,8 +249,8 @@ function SetReferences() {
     UMI.MesBut01.HideOrNot(Info.buttonokhidden);
     UMI.MesBut02.SetRef(Info.buttondeny);
     UMI.MesBut02.HideOrNot(Info.buttondenyhidden);
-    UMI.MesBut01.SetAttribute('onclick','Info.OK()');    
-    UMI.MesBut02.SetAttribute('onclick','Info.Deny()');
+    UMI.MesBut01.SetAttribute('onclick', 'Info.OK()');
+    UMI.MesBut02.SetAttribute('onclick', 'Info.Deny()');
 }
 
 function InitRPS() {
@@ -302,7 +281,7 @@ function InitRPS() {
     UMI.RockButton.SetAttribute("class", "rpsitem");
     UMI.ScissorsButton = new Element("button", "ScissorsButton");
     UMI.ScissorsButton.Change("innerHTML", "✌️");
-    UMI.ScissorsButton.SetAttribute("class", "rpsitem");    
+    UMI.ScissorsButton.SetAttribute("class", "rpsitem");
     UMI.PaperButton = new Element("button", "PaperButton");
     UMI.PaperButton.Change("innerHTML", "✋");
     UMI.PaperButton.SetAttribute("class", "rpsitem");
@@ -310,9 +289,9 @@ function InitRPS() {
     UMI.RPSBlock.HideOrNot(true);
 }
 
-function InitSaveload(){
-    UMI.LoadSave = new Element('div', 'LoadSave', false);   
-    UMI.LoadSaveMenu = new Element('p', 'LoadSaveMenu'); 
+function InitSaveload() {
+    UMI.LoadSave = new Element('div', 'LoadSave', false);
+    UMI.LoadSaveMenu = new Element('p', 'LoadSaveMenu');
     UMI.LoadSaveMenu.Change("innerHTML", "🎬 Сохранение/загрузка");
     new Element("hr");
     UMI.SaveButton = new Element('button', "SaveButton");
@@ -326,7 +305,6 @@ function InitSaveload(){
 }
 
 function CreateInterface() {
-    InitLoader();
     InitRPS();
     InitDialog();
     InitPlayerStats();
@@ -334,9 +312,9 @@ function CreateInterface() {
     InitMessage();
     InitSaveload();
     setInterval(() => SetReferences(), 100);
-    
+
     UMI.Version = new Element("a", "Version");
-    UMI.Version.Change("innerHTML", "version: 🎲0.02rps");
+    UMI.Version.Change("innerHTML", "version: 📥0.03sl");
 }
 
 function Main() {
