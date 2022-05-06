@@ -21,6 +21,7 @@ class Entity {
         this.Intelligence = values.intelligence || 0;
         this.Luck = values.luck || 0;
         this.Charisma = values.charisma || 0;
+        this.Extra = values.extra || function () { };
         this.Completed = values.completed || false;
     }
 }
@@ -101,6 +102,7 @@ class Character extends Entity {
             this.Energy += entity.Energy;
             entity.Icon = "";
             entity.Completed = true;
+            entity.Extra();
         }
     }
     WearItem(entity) {
@@ -111,6 +113,7 @@ class Character extends Entity {
         this.Stress += entity.Stress;
         this.Poison += entity.Poison;
         this.Hunger += entity.Hunger;
+        entity.Extra();
     }
     Unwear(entity) {
         this.Level -= entity.Level
