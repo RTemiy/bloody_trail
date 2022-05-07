@@ -318,33 +318,6 @@ function CreateInterface() {
 }
 
 function Main() {
-    window.addEventListener('beforeinstallprompt', (event) => {
-  // Запрет показа информационной мини-панели на мобильных устройствах.
-  event.preventDefault();
-  console.log('👍', 'beforeinstallprompt', event);
-  // Убираем событие, чтобы его можно было активировать позже.
-  window.deferredPrompt = event;
-  // Убираем класс «hidden» из контейнера кнопки установки.
-  divInstall.classList.toggle('hidden', false);
-});
-    butInstall.addEventListener('click', async () => {
-  console.log('👍', 'butInstall-clicked');
-  const promptEvent = window.deferredPrompt;
-  if (!promptEvent) {
-    // Отложенный запрос недоступен.
-    return;
-  }
-  // Показать запрос на установку.
-  promptEvent.prompt();
-  // Записать результат в журнал.
-  const result = await promptEvent.userChoice;
-  console.log('👍', 'userChoice', result);
-  // Сбросить переменную отложенного запроса:
-  // prompt() можно вызвать только один раз.
-  window.deferredPrompt = null;
-  // Скрыть кнопку установки.
-  divInstall.classList.toggle('hidden', true);
-});
     Script.Set("Start");
     CreateInterface();
     Player.Start();
