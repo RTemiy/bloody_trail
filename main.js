@@ -318,6 +318,15 @@ function CreateInterface() {
 }
 
 function Main() {
+    window.addEventListener('beforeinstallprompt', (event) => {
+  // Запрет показа информационной мини-панели на мобильных устройствах.
+  event.preventDefault();
+  console.log('👍', 'beforeinstallprompt', event);
+  // Убираем событие, чтобы его можно было активировать позже.
+  window.deferredPrompt = event;
+  // Убираем класс «hidden» из контейнера кнопки установки.
+  divInstall.classList.toggle('hidden', false);
+});
     Script.Set("Start");
     CreateInterface();
     Player.Start();
